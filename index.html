@@ -9,7 +9,8 @@
   <meta property="og:description" content="输入提示词，使用自己的生图 API Key 生成图片。">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#f5f5f7">
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
   <title>Pory.AI绘图</title>
   <style>
     :root {
@@ -884,6 +885,31 @@
       text-decoration: underline;
       text-decoration-thickness: 1px;
       text-underline-offset: 3px;
+      position: relative;
+    }
+
+    .copy-toast {
+      position: absolute;
+      left: 50%;
+      top: calc(100% + 8px);
+      transform: translateX(-50%) translateY(4px);
+      background: #111111;
+      color: #ffffff;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      line-height: 1;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      z-index: 20;
+    }
+
+    .copy-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
     }
 
     .top-actions {
@@ -1457,7 +1483,7 @@
         <h1>Pory.AI绘图</h1>
         <div class="author-info">
           <span>国内可用 简单快捷</span>
-          <span>作者: Pory <span class="author-highlight" onclick="copyWx()">微信: qianaiyxs</span></span>
+          <span>作者: Pory <span class="author-highlight" onclick="copyWx()">微信: qianaiyxs<span class="copy-toast" id="wxCopyToast">已复制</span></span></span>
         </div>
         <div class="top-actions">
           <button class="btn-help" onclick="openHelpModal()">说明</button>
@@ -1681,7 +1707,8 @@
         historyPrev: el('historyPrev'),
         historyNext: el('historyNext'),
         historyPageInfo: el('historyPageInfo'),
-        clearHistory: el('clearHistory')
+        clearHistory: el('clearHistory'),
+        wxCopyToast: el('wxCopyToast')
       };
 
       let refImages = []; // 参考图数据 (base64)
@@ -2660,18 +2687,27 @@
             document.body.removeChild(input);
           }
           msg(successText);
+          return true;
         } catch (e) {
           msg('复制失败，请手动复制 qianaiyxs', true);
+          return false;
         }
       }
 
-      window.copyWx = () => {
-        copyText('qianaiyxs', '微信号已复制');
+      window.copyWx = async () => {
+        const ok = await copyText('qianaiyxs', '微信号已复制');
+        if (!ok || !ui.wxCopyToast) return;
+        ui.wxCopyToast.classList.add('show');
+        clearTimeout(ui.wxCopyToast._timer);
+        ui.wxCopyToast._timer = setTimeout(() => {
+          ui.wxCopyToast.classList.remove('show');
+        }, 1400);
       };
 
       window.copyFromData = (btn) => {
         const txt = btn.getAttribute('data-text');
-        copyText(txt, '提示词已复制').then(() => {
+        copyText(txt, '提示词已复制').then((ok) => {
+          if (!ok) return;
           const originalText = btn.innerText;
           btn.innerText = '已复制';
           setTimeout(() => btn.innerText = originalText, 1500);
