@@ -4,8 +4,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+  <meta name="description" content="Pory.AI绘图是一个由用户自填生图 API Key 的在线图片生成工具，支持 GPT Image 2 和 Nano Banana Pro。">
+  <meta property="og:title" content="Pory.AI绘图">
+  <meta property="og:description" content="输入提示词，使用自己的生图 API Key 生成图片。">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#f5f5f7">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <title>妙笔生财绘图</title>
+  <title>Pory.AI绘图</title>
   <style>
     :root {
       /* 修改：背景色稍微调亮，更柔和 */
@@ -809,6 +814,584 @@
       padding: 60px 20px;
       font-size: 14px;
     }
+
+    /* Apple-inspired monochrome refinement */
+    :root {
+      --bg-dark: #f5f5f7;
+      --surface: rgba(255, 255, 255, 0.82);
+      --surface-strong: rgba(255, 255, 255, 0.96);
+      --surface-muted: rgba(0, 0, 0, 0.035);
+      --glass: var(--surface);
+      --glass-border: rgba(0, 0, 0, 0.1);
+      --accent: #000000;
+      --accent-glow: rgba(0, 0, 0, 0.08);
+      --text-main: #111111;
+      --text-muted: #6e6e73;
+      --radius: 14px;
+    }
+
+    body {
+      color: var(--text-main);
+      background-color: var(--bg-dark);
+      background-image:
+        linear-gradient(180deg, #ffffff 0%, #f5f5f7 58%, #eeeeef 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+      letter-spacing: 0;
+    }
+
+    .app-container {
+      grid-template-columns: minmax(320px, 360px) 1fr;
+      gap: 24px;
+      max-width: 1480px;
+      padding: 28px;
+    }
+
+    .panel-control {
+      background: var(--surface);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 22px;
+      padding: 22px;
+      gap: 11px;
+      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.08);
+    }
+
+    header {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      padding-bottom: 14px;
+      margin-bottom: 2px;
+    }
+
+    h1 {
+      color: #111111;
+      background: none;
+      -webkit-text-fill-color: initial;
+      font-size: 24px;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+
+    .author-info {
+      margin-top: 7px;
+      gap: 10px;
+      color: #6e6e73;
+      font-size: 12px;
+      line-height: 1.35;
+      flex-wrap: wrap;
+    }
+
+    .author-highlight {
+      color: #111111;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    label,
+    .key-label,
+    .result-meta,
+    .pagination-info,
+    .history-empty {
+      color: var(--text-muted);
+      letter-spacing: 0;
+    }
+
+    input[type="text"],
+    textarea,
+    select {
+      background-color: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      color: #111111;
+      border-radius: 12px;
+      padding: 9px 12px;
+      box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.02);
+    }
+
+    textarea {
+      min-height: 78px;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #9a9aa0;
+    }
+
+    select {
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1.5L6 6.5L11 1.5' stroke='%236e6e73' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #000000;
+      box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.07);
+      background-color: #ffffff;
+    }
+
+    .inline-row {
+      gap: 12px;
+    }
+
+    .inline-row label {
+      width: 70px;
+    }
+
+    .drop-zone,
+    .key-section {
+      background: var(--surface-muted);
+      border: 1px solid rgba(0, 0, 0, 0.09);
+      border-radius: 14px;
+    }
+
+    .drop-zone {
+      padding: 11px;
+    }
+
+    .drop-zone:hover {
+      background: rgba(0, 0, 0, 0.055);
+      border-color: rgba(0, 0, 0, 0.22);
+    }
+
+    .thumb {
+      width: 54px;
+      height: 54px;
+      border-radius: 10px;
+      border-color: rgba(0, 0, 0, 0.12);
+      background: #ffffff;
+    }
+
+    .thumb .del {
+      background: rgba(0, 0, 0, 0.68);
+    }
+
+    .btn-main {
+      height: 44px;
+      min-height: 44px;
+      border-radius: 999px;
+      background: #000000;
+      color: #ffffff;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.16);
+      font-size: 15px;
+      font-weight: 650;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+    }
+
+    .btn-main:hover {
+      filter: none;
+      transform: translateY(-1px);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-main[disabled] {
+      background: #b8b8bd;
+      color: #ffffff;
+      opacity: 1;
+    }
+
+    .spinner {
+      border-color: rgba(255, 255, 255, 0.35);
+      border-top-color: #ffffff;
+    }
+
+    .btn-sm,
+    .btn-copy,
+    .history-btn,
+    .pagination-btn,
+    .lb-btn {
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      color: #111111;
+      border-radius: 999px;
+      font-weight: 500;
+    }
+
+    .btn-sm:hover,
+    .btn-copy:hover,
+    .history-btn:hover,
+    .pagination-btn:hover:not(:disabled),
+    .lb-btn:hover,
+    .lb-btn.primary:hover {
+      background: #000000;
+      border-color: #000000;
+      color: #ffffff;
+    }
+
+    .status-bar {
+      color: #111111;
+    }
+
+    .key-help,
+    .mini-note,
+    .help-item p {
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .key-actions-row,
+    .history-header-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .text-button,
+    .btn-secondary {
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: #ffffff;
+      color: #111111;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .text-button:hover,
+    .btn-secondary:hover {
+      background: #000000;
+      border-color: #000000;
+      color: #ffffff;
+    }
+
+    .key-section {
+      display: grid;
+      gap: 7px;
+    }
+
+    .key-input-row input {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .key-help,
+    .mini-note {
+      color: #6e6e73;
+    }
+
+    .key-actions-row .btn-sm {
+      flex: 1;
+    }
+
+    .btn-secondary {
+      height: 38px;
+      font-size: 13px;
+    }
+
+    .panel-gallery {
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    }
+
+    .panel-gallery:empty::before {
+      content: "等待生成结果";
+      min-height: calc(100vh - 100px);
+      display: grid;
+      place-items: center;
+      color: #9a9aa0;
+      font-size: 15px;
+    }
+
+    .result-group {
+      margin-bottom: 30px;
+    }
+
+    .result-meta::before {
+      background: #111111;
+    }
+
+    .grid-imgs {
+      gap: 18px;
+    }
+
+    .img-card {
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 18px;
+      height: 310px;
+      box-shadow: 0 16px 44px rgba(0, 0, 0, 0.08);
+    }
+
+    .img-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(0, 0, 0, 0.18);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.13);
+    }
+
+    .overlay-actions {
+      background: linear-gradient(to top, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+      padding: 26px 14px 14px;
+    }
+
+    .btn-icon {
+      background: #000000;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-icon:hover {
+      background: #ffffff;
+      color: #000000;
+      border-color: rgba(0, 0, 0, 0.14);
+    }
+
+    .btn-history,
+    .btn-help {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      color: #111111;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      box-shadow: none;
+      position: static;
+      z-index: auto;
+      cursor: pointer;
+    }
+
+    .btn-history:hover,
+    .btn-help:hover {
+      background: #000000;
+      color: #ffffff;
+      border-color: #000000;
+    }
+
+    .history-modal,
+    .help-modal,
+    .lightbox {
+      background: rgba(245, 245, 247, 0.9);
+      color: #111111;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+
+    .history-header,
+    .history-footer {
+      border-color: rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.64);
+    }
+
+    .history-header h3 {
+      color: #111111;
+      font-weight: 650;
+    }
+
+    .history-close,
+    .help-close,
+    .lb-header {
+      color: #6e6e73;
+    }
+
+    .history-close:hover,
+    .help-close:hover {
+      color: #111111;
+    }
+
+    .help-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 210;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+    }
+
+    .help-modal.show {
+      display: flex;
+    }
+
+    .help-panel {
+      width: min(640px, 100%);
+      max-height: min(720px, 92vh);
+      overflow: auto;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 22px;
+      box-shadow: 0 26px 90px rgba(0, 0, 0, 0.18);
+    }
+
+    .help-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 22px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .help-header h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .help-close {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 15px;
+      padding: 8px 0;
+    }
+
+    .help-body {
+      display: grid;
+      gap: 16px;
+      padding: 20px 22px 24px;
+    }
+
+    .help-item {
+      display: grid;
+      gap: 6px;
+    }
+
+    .help-item strong {
+      font-size: 14px;
+    }
+
+    .help-item p {
+      color: #6e6e73;
+      font-size: 13px;
+    }
+
+    .history-item {
+      background: var(--surface-strong);
+      border-color: rgba(0, 0, 0, 0.08);
+      border-radius: 16px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
+    }
+
+    .history-item-thumb {
+      background: #f5f5f7;
+      border-radius: 12px;
+    }
+
+    .history-item-time {
+      color: #111111;
+    }
+
+    .history-item-prompt {
+      color: #111111;
+      font-size: 13px;
+      line-height: 1.35;
+      margin: 5px 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .history-item-status.completed,
+    .history-item-status.pending,
+    .history-item-status.failed,
+    .history-item-status.canceled {
+      background: #f0f0f2;
+      color: #111111;
+    }
+
+    .lb-main img {
+      box-shadow: 0 22px 80px rgba(0, 0, 0, 0.22);
+      border-radius: 16px;
+    }
+
+    .lb-btn.primary {
+      border-color: #000000;
+      color: #000000;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.14);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 0, 0, 0.25);
+    }
+
+    @media (max-width: 900px) {
+      .app-container {
+        padding: 14px;
+      }
+
+      .btn-history,
+      .btn-help {
+        width: auto;
+        height: auto;
+      }
+
+      .top-actions {
+        margin-top: 10px;
+      }
+
+      .panel-control,
+      .panel-gallery {
+        border-radius: 20px;
+      }
+
+      .panel-gallery {
+        min-height: 360px;
+        padding: 16px;
+      }
+
+      .panel-gallery:empty::before {
+        min-height: 260px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .author-info {
+        display: block;
+      }
+
+      .author-info span {
+        display: block;
+      }
+
+      .key-input-row {
+        flex-wrap: wrap;
+      }
+
+      .key-input-row input {
+        flex-basis: 100%;
+      }
+
+      .key-actions-row {
+        flex-wrap: wrap;
+      }
+
+      .btn-sm {
+        flex: 1;
+      }
+
+      .img-card {
+        height: 210px;
+      }
+
+      .history-item {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .history-item-thumb {
+        width: 100%;
+        height: 160px;
+      }
+
+      .history-item-actions {
+        width: 100%;
+      }
+
+      .history-btn {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 
@@ -817,10 +1400,14 @@
   <div class="app-container">
     <aside class="panel-control">
       <header>
-        <h1>妙笔生财绘图</h1>
+        <h1>Pory.AI绘图</h1>
         <div class="author-info">
           <span>国内可用 简单快捷</span>
-          <span>作者: 亮子 <span class="author-highlight" onclick="copyWx()">微信: 13476192892</span></span>
+          <span>作者: Pory <span class="author-highlight" onclick="copyWx()">微信: qianaiyxs</span></span>
+        </div>
+        <div class="top-actions">
+          <button class="btn-help" onclick="openHelpModal()">说明</button>
+          <button class="btn-history" onclick="openHistory()">历史</button>
         </div>
       </header>
 
@@ -871,12 +1458,17 @@
       </div>
 
       <div class="key-section">
-        <div class="key-label">第3步：输入Key (需为妙笔支持的API Key)</div>
+        <div class="key-label">API Key</div>
+        <p class="key-help">填写你自己的生图 API Key。它只保存在当前浏览器，生成和查询余额时发送给生图接口。</p>
         <div class="key-input-row">
-          <input type="text" id="userKey" placeholder="sk-..." style="height:34px;">
-          <button class="btn-sm" id="saveKey">保存</button>
-          <button class="btn-sm" id="queryCredits">查询剩余</button>
+          <input type="password" id="userKey" placeholder="sk-..." style="height:34px;">
         </div>
+        <div class="key-actions-row">
+          <button class="btn-sm" id="saveKey" type="button">保存 Key</button>
+          <button class="btn-sm" id="queryCredits" type="button">查询余额</button>
+          <button class="btn-sm" id="clearKey" type="button">清除</button>
+        </div>
+        <p class="mini-note">公开网页不会代管 Key；更换设备或浏览器需要重新填写。</p>
       </div>
 
       <div class="status-bar" id="status"></div>
@@ -885,20 +1477,20 @@
         <span class="spinner" id="spin"></span>
         <span id="btnText">生成</span>
       </button>
+      <button class="btn-secondary" id="cancelTask" type="button" hidden>取消本次生成</button>
     </aside>
 
-    <main class="panel-gallery" id="gallery">
-    </main>
+    <main class="panel-gallery" id="gallery"></main>
   </div>
-
-  <!-- Fixed History Button -->
-  <button class="btn-history" onclick="openHistory()">📋 历史</button>
 
   <!-- History Modal -->
   <div class="history-modal" id="historyModal">
     <div class="history-header">
-      <h3>📋 历史生成记录</h3>
-      <button class="history-close" onclick="closeHistory()">✕ 关闭</button>
+      <h3>历史生成记录</h3>
+      <div class="history-header-actions">
+        <button class="history-btn" id="clearHistory" type="button">清空历史</button>
+        <button class="history-close" onclick="closeHistory()">✕ 关闭</button>
+      </div>
     </div>
     <div class="history-body">
       <div class="history-list" id="historyList"></div>
@@ -907,6 +1499,37 @@
       <button class="pagination-btn" id="historyPrev" onclick="historyPrevPage()">← 上一页</button>
       <span class="pagination-info" id="historyPageInfo">第 1 页 / 共 1 页</span>
       <button class="pagination-btn" id="historyNext" onclick="historyNextPage()">下一页 →</button>
+    </div>
+  </div>
+
+  <div class="help-modal" id="helpModal">
+    <div class="help-panel">
+      <div class="help-header">
+        <h3>使用说明</h3>
+        <button class="help-close" id="helpClose" type="button">✕ 关闭</button>
+      </div>
+      <div class="help-body">
+        <div class="help-item">
+          <strong>如何开始</strong>
+          <p>填写图片描述，选择模型、比例和分辨率，再填入自己的生图 API Key 后点击生成。</p>
+        </div>
+        <div class="help-item">
+          <strong>Key 保存在哪里</strong>
+          <p>Key 只保存在当前浏览器的本地存储中。生成和查询余额时会发送给生图接口；点击“清除”后，本机保存的 Key 会被删除。</p>
+        </div>
+        <div class="help-item">
+          <strong>积分怎么扣</strong>
+          <p>页面按接口返回的 credits 换算显示余额，10 credits 记为 1 积分。单次生图扣费会受模型、分辨率和接口规则影响，最终以生图接口实际结算为准。</p>
+        </div>
+        <div class="help-item">
+          <strong>图片会不会保存</strong>
+          <p>页面会在当前浏览器保存生成历史，方便回看结果。清空历史后，本地记录会被删除。</p>
+        </div>
+        <div class="help-item">
+          <strong>失败怎么办</strong>
+          <p>常见原因包括 Key 错误、余额不足、请求过快、接口繁忙或图片审核未通过。请按页面提示处理。</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -962,10 +1585,14 @@
         key: el('userKey'),
         saveKey: el('saveKey'),
         queryCredits: el('queryCredits'),
+        clearKey: el('clearKey'),
+        helpModal: el('helpModal'),
+        helpClose: el('helpClose'),
         drop: el('drop'),
         fileInput: el('file'),
         thumbs: el('thumbs'),
         go: el('go'),
+        cancelTask: el('cancelTask'),
         btnText: el('btnText'),
         spin: el('spin'),
         status: el('status'),
@@ -982,7 +1609,8 @@
         historyList: el('historyList'),
         historyPrev: el('historyPrev'),
         historyNext: el('historyNext'),
-        historyPageInfo: el('historyPageInfo')
+        historyPageInfo: el('historyPageInfo'),
+        clearHistory: el('clearHistory')
       };
 
       let refImages = []; // 参考图数据 (base64)
@@ -990,6 +1618,10 @@
       let currentLbUrl = ''; // 当前大图URL
       let currentImgIndex = -1; // 当前大图在所有图片中的索引
       let viewingFromHistory = false; // 标记是否从历史记录查看大图
+      let currentAbortController = null;
+      let currentPollTimer = null;
+      let activeTaskId = '';
+      let activePrompt = '';
 
       // ====== 初始化：加载缓存 ======
       ui.key.value = localStorage.getItem(STORE_KEY) || '';
@@ -998,11 +1630,24 @@
 
       // 分辨率初始化：优先缓存，无缓存则默认 4K
       ui.size.value = localStorage.getItem(STORE_SIZE) || '4K';
-
       // 监听保存
       ui.saveKey.onclick = () => {
-        localStorage.setItem(STORE_KEY, ui.key.value.trim());
-        msg('Key 已保存');
+        const key = ui.key.value.trim();
+        if (!key) return msg('请先填写 Key', true);
+        localStorage.setItem(STORE_KEY, key);
+        msg('Key 已保存到当前浏览器');
+      };
+
+      ui.clearKey.onclick = () => {
+        ui.key.value = '';
+        localStorage.removeItem(STORE_KEY);
+        msg('已清除本机保存的 Key');
+      };
+
+      window.openHelpModal = () => ui.helpModal.classList.add('show');
+      ui.helpClose.onclick = () => ui.helpModal.classList.remove('show');
+      ui.helpModal.onclick = (e) => {
+        if (e.target === ui.helpModal) ui.helpModal.classList.remove('show');
       };
 
       // 查询剩余次数
@@ -1023,10 +1668,10 @@
             const remainingPoints = credits / 10;
             msg(`剩余积分: ${remainingPoints}`);
           } else {
-            msg('查询失败: ' + (data.msg || '未知错误'), true);
+            msg(friendlyError(data.msg || data.message || '余额查询失败'), true);
           }
         } catch (e) {
-          msg('查询失败: ' + e.message, true);
+          msg(friendlyError(e.message || '余额查询失败'), true);
         }
       };
       ui.ratio.onchange = () => localStorage.setItem(STORE_RATIO, ui.ratio.value);
@@ -1034,6 +1679,17 @@
       ui.model.onchange = () => {
         localStorage.setItem(STORE_MODEL, ui.model.value);
         updateSizeAvailability();
+      };
+
+      ui.cancelTask.onclick = () => {
+        if (currentPollTimer) {
+          clearInterval(currentPollTimer);
+          currentPollTimer = null;
+        }
+        if (currentAbortController) currentAbortController.abort();
+        if (activeTaskId) addHistoryItem(activeTaskId, 'canceled', [], activePrompt);
+        msg('已取消本次生成');
+        setLoading(false);
       };
 
       function updateSizeAvailability() {
@@ -1102,6 +1758,36 @@
         return rawUrl;
       }
 
+      function escapeHtml(value) {
+        return String(value || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      function friendlyError(message, status) {
+        const raw = String(message || '').trim();
+        const text = raw.toLowerCase();
+        if (status === 401 || status === 403 || text.includes('unauthorized') || text.includes('invalid api') || text.includes('apikey') || text.includes('api key')) {
+          return 'Key 无效或没有权限，请检查后重新填写。';
+        }
+        if (status === 402 || text.includes('insufficient') || text.includes('balance') || text.includes('credit') || text.includes('余额') || text.includes('额度')) {
+          return '余额不足，请充值后再试。';
+        }
+        if (status === 429 || text.includes('too many') || text.includes('rate') || text.includes('high demand') || text.includes('并发') || text.includes('频繁')) {
+          return '请求过快或接口繁忙，请稍后再试。';
+        }
+        if (text.includes('content') || text.includes('policy') || text.includes('审核') || text.includes('rejected')) {
+          return '图片审核未通过，请调整描述后再试。';
+        }
+        if (text.includes('network') || text.includes('failed to fetch') || text.includes('timeout')) {
+          return '网络或接口暂时不可用，请稍后重试。';
+        }
+        return raw ? `生成失败：${raw}` : '生成失败，请稍后重试。';
+      }
+
       // ====== 历史记录管理 ======
       function loadHistory() {
         try {
@@ -1165,6 +1851,7 @@
             const isRealFailed = item.status === 'failed';  // 真正的API失败
             const isRejected = item.status === 'rejected';  // 成功但无图片（审核）
             const isTimeout = item.status === 'timeout';     // 本地轮询超时
+            const isCanceled = item.status === 'canceled';
             const isPending = item.status === 'pending';
 
             let statusClass, statusText;
@@ -1174,6 +1861,9 @@
             } else if (isRealFailed) {
               statusClass = 'failed';
               statusText = '已失败';
+            } else if (isCanceled) {
+              statusClass = 'canceled';
+              statusText = '已取消';
             } else if (isRejected) {
               statusClass = 'pending';  // 用pending样式，因为可以刷新
               statusText = '无图片(审核)';
@@ -1188,17 +1878,19 @@
             const hasImages = item.imageUrls && item.imageUrls.length > 0;
             let thumbText = '等待结果...';
             if (isRealFailed) thumbText = '生成失败';
+            if (isCanceled) thumbText = '已取消';
             if (isRejected) thumbText = '审核未通过';
             const thumbHtml = hasImages
               ? `<img src="${item.imageUrls[0]}" loading="lazy">`
               : '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);font-size:12px;">' + thumbText + '</div>';
+            const promptText = escapeHtml(item.prompt || '无提示词记录');
 
             return `
           <div class="history-item" data-task-id="${item.taskId}">
             <div class="history-item-thumb">${thumbHtml}</div>
             <div class="history-item-info">
               <div class="history-item-time">${time}</div>
-              <div class="history-item-taskid">Task: ${item.taskId}</div>
+              <div class="history-item-prompt">${promptText}</div>
               <div class="history-item-status ${statusClass}">${statusText}</div>
             </div>
             <div class="history-item-actions">
@@ -1222,6 +1914,14 @@
 
       window.closeHistory = () => {
         ui.historyModal.classList.remove('show');
+      };
+
+      ui.clearHistory.onclick = () => {
+        if (!confirm('确认清空当前浏览器里的历史记录？')) return;
+        localStorage.removeItem(HISTORY_KEY);
+        historyPage = 1;
+        renderHistoryList();
+        msg('历史记录已清空');
       };
 
       window.historyPrevPage = () => {
@@ -1268,9 +1968,12 @@
         if (!key) return msg('请填写 Key', true);
 
         setLoading(true);
-        msg('正在生成，请耐心等待...');
+        msg('正在提交任务，请保持页面打开...');
 
         const taskId = Date.now().toString();
+        activeTaskId = taskId;
+        activePrompt = prompt;
+        currentAbortController = new AbortController();
         addHistoryItem(taskId, 'pending', [], prompt);
 
         try {
@@ -1285,6 +1988,7 @@
           let payload = {};
           let options = {
             method: 'POST',
+            signal: currentAbortController.signal,
             headers: {
               'Authorization': 'Bearer ' + key,
               'Content-Type': 'application/json'
@@ -1349,7 +2053,7 @@
             if (errMessage.includes('experiencing high demand') || res.status === 429) {
                errMessage = `系统当前高负载（API请求过快或并发过高），请稍后重试。\n详细: ${errMessage}`;
             }
-            throw new Error(errMessage);
+            throw new Error(friendlyError(errMessage, res.status));
           }
 
           let urls = [];
@@ -1362,7 +2066,7 @@
             const data = await res.clone().json();
             if (data.code && data.code < 0) {
                 console.error("API 业务逻辑错误详情:", data);
-                throw new Error(data.msg || data.error || JSON.stringify(data));
+                throw new Error(friendlyError(data.msg || data.error || JSON.stringify(data)));
             }
           }
           if (contentType.includes('text/event-stream') || contentType.includes('stream') || contentType.includes('application/x-ndjson')) {
@@ -1395,7 +2099,7 @@
                   
                   // 判断是否为错误返回
                   if (dataObj.code && dataObj.code < 0) {
-                     throw new Error(dataObj.msg || 'API Error');
+                     throw new Error(friendlyError(dataObj.msg || 'API Error'));
                   }
 
                   // 尝试解析进度和结果
@@ -1435,7 +2139,7 @@
                  try {
                     const dataObj = JSON.parse(dataStr);
                     rawResponseDebug.push(dataObj);
-                    if (dataObj.code && dataObj.code < 0) throw new Error(dataObj.msg || 'API Error');
+                    if (dataObj.code && dataObj.code < 0) throw new Error(friendlyError(dataObj.msg || 'API Error'));
                     
                     let imgUrl = dataObj.imageUrl || dataObj.url;
                     if (!imgUrl && dataObj.data) {
@@ -1502,18 +2206,19 @@
             const pollingId = lastData.id || lastData.task_id || (lastData.data && lastData.data.id) || (lastData.data && typeof lastData.data === 'string' && !lastData.data.startsWith('http') ? lastData.data : null);
             
             if (pollingId) {
-              msg(`任务已提交 (ID: ${pollingId})，正在等待绘制完成...`, false);
+              msg(`任务已提交，正在等待绘制完成...`, false);
               
               // 启动轮询机制
               let pollCount = 0;
               const maxPolls = 150; // 最多轮询150次 (约5分钟)
               const pollInterval = 2000; // 每2秒轮询一次
               
-              const pollTimer = setInterval(async () => {
+              currentPollTimer = setInterval(async () => {
                 pollCount++;
                 try {
                   const pollRes = await fetch('https://grsai.dakka.com.cn/v1/draw/result', {
                     method: 'POST',
+                    signal: currentAbortController.signal,
                     headers: {
                       'Authorization': 'Bearer ' + key,
                       'Content-Type': 'application/json'
@@ -1521,12 +2226,13 @@
                     body: JSON.stringify({ id: pollingId })
                   });
                   
-                  if (!pollRes.ok) throw new Error(`HTTP ${pollRes.status}`);
+                  if (!pollRes.ok) throw new Error(friendlyError(`HTTP ${pollRes.status}`, pollRes.status));
                   
                   const pollData = await pollRes.json();
                   if (pollData.code && pollData.code < 0) {
-                     clearInterval(pollTimer);
-                     throw new Error(pollData.msg || 'API Error');
+                     clearInterval(currentPollTimer);
+                     currentPollTimer = null;
+                     throw new Error(friendlyError(pollData.msg || 'API Error'));
                   }
                   
                   // 根据文档格式，实际数据可能包裹在 data 中
@@ -1558,16 +2264,18 @@
                   
                   // 检查任务是否失败
                   if (status === 'FAILED' || status === 'FAILURE' || status === 'failed') {
-                    clearInterval(pollTimer);
+                    clearInterval(currentPollTimer);
+                    currentPollTimer = null;
                     addHistoryItem(taskId, 'failed', [], prompt);
-                    msg(`绘制失败: ${targetData.failure_reason || targetData.error || targetData.failReason || targetData.msg || pollData.msg || '未知错误'}`, true);
+                    msg(friendlyError(targetData.failure_reason || targetData.error || targetData.failReason || targetData.msg || pollData.msg || '未知错误'), true);
                     setLoading(false);
                     return;
                   }
 
                   if (status === 'SUCCESS' || status === 'succeeded' || imgUrl) {
                     if (imgUrl) {
-                      clearInterval(pollTimer);
+                      clearInterval(currentPollTimer);
+                      currentPollTimer = null;
                       msg('创作完成');
                       addHistoryItem(taskId, 'completed', [imgUrl], prompt);
                       addGalleryGroup([imgUrl], prompt);
@@ -1578,16 +2286,23 @@
                       console.log("成功但无图片:", pollData);
                     }
                   } else if (pollCount >= maxPolls) {
-                    clearInterval(pollTimer);
+                    clearInterval(currentPollTimer);
+                    currentPollTimer = null;
                     addHistoryItem(taskId, 'failed', [], prompt);
-                    msg('轮询超时，未能在规定时间内获取到图片', true);
+                    msg('等待超时，暂时没有拿到图片，请稍后查看历史或重新生成。', true);
                     setLoading(false);
                   }
                 } catch (err) {
-                  clearInterval(pollTimer);
-                  console.error('轮询错误:', err);
-                  addHistoryItem(taskId, 'failed', [], prompt);
-                  msg('轮询错误: ' + (err.message || '未知错误'), true);
+                  if (currentPollTimer) clearInterval(currentPollTimer);
+                  currentPollTimer = null;
+                  if (err.name === 'AbortError') {
+                    addHistoryItem(taskId, 'canceled', [], prompt);
+                    msg('已取消本次生成');
+                  } else {
+                    console.error('轮询错误:', err);
+                    addHistoryItem(taskId, 'failed', [], prompt);
+                    msg(friendlyError(err.message || '未知错误'), true);
+                  }
                   setLoading(false);
                 }
               }, pollInterval);
@@ -1605,9 +2320,14 @@
           // 如果没有被轮询拦截，则直接在这里关闭loading
           setLoading(false);
         } catch (err) {
-          console.error(err);
-          addHistoryItem(taskId, 'failed', [], prompt);
-          msg('错误: ' + (err.message || '未知错误'), true);
+          if (err.name === 'AbortError') {
+            addHistoryItem(taskId, 'canceled', [], prompt);
+            msg('已取消本次生成');
+          } else {
+            console.error(err);
+            addHistoryItem(taskId, 'failed', [], prompt);
+            msg(friendlyError(err.message || '未知错误'), true);
+          }
           setLoading(false);
         }
       };
@@ -1616,12 +2336,18 @@
       function setLoading(ing) {
         if (ing) {
           ui.go.disabled = true;
+          ui.cancelTask.hidden = false;
           ui.spin.style.display = 'inline-block';
-          ui.btnText.textContent = '正在绘制...';
+          ui.btnText.textContent = '正在生成...';
         } else {
           ui.go.disabled = false;
+          ui.cancelTask.hidden = true;
           ui.spin.style.display = 'none';
           ui.btnText.textContent = '生成';
+          currentAbortController = null;
+          currentPollTimer = null;
+          activeTaskId = '';
+          activePrompt = '';
         }
       }
 
@@ -1848,7 +2574,7 @@
       };
 
       window.copyWx = () => {
-        navigator.clipboard.writeText('13476192892');
+        navigator.clipboard.writeText('qianaiyxs');
         msg('微信号已复制');
       };
 
@@ -1873,3 +2599,4 @@
 </body>
 
 </html>
+
