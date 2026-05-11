@@ -1652,6 +1652,10 @@
       gap: 12px;
     }
 
+    .pricing-grid.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
     .pricing-card {
       border: 1px solid rgba(0, 0, 0, 0.08);
       background: #f5f5f7;
@@ -1694,6 +1698,20 @@
       padding: 5px 9px;
       font-size: 12px;
       font-weight: 600;
+    }
+
+    .help-list,
+    .help-steps {
+      margin: 0;
+      padding-left: 18px;
+      color: #6e6e73;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .help-list li,
+    .help-steps li {
+      margin: 4px 0;
     }
 
     .history-item {
@@ -1844,6 +1862,10 @@
       }
 
       .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing-grid.three {
         grid-template-columns: 1fr;
       }
 
@@ -2032,8 +2054,40 @@
           <p>填写图片描述，选择模型、比例和分辨率，再填入自己的生图 API Key 后点击生成。</p>
         </div>
         <div class="help-item">
+          <strong>购买套餐</strong>
+          <div class="pricing-grid three">
+            <div class="pricing-card">
+              <div class="pricing-name">体验包</div>
+              <div class="pricing-points">￥9.9</div>
+              <p>3000 积分，GPT Image 2 约 50 张。</p>
+            </div>
+            <div class="pricing-card">
+              <div class="pricing-name">常用包</div>
+              <div class="pricing-points">￥19.9</div>
+              <p>7000 积分，GPT Image 2 约 116 张。</p>
+            </div>
+            <div class="pricing-card">
+              <div class="pricing-name">高级包</div>
+              <div class="pricing-points">￥39.9</div>
+              <p>16000 积分，GPT Image 2 约 266 张。</p>
+            </div>
+          </div>
+        </div>
+        <div class="help-item">
+          <strong>购买后怎么用</strong>
+          <ol class="help-steps">
+            <li>复制微信号 qianaiyxs，联系购买额度包。</li>
+            <li>付款后会收到一个独立 API Key。</li>
+            <li>把 Key 填入本页，保存后即可生成和查询余额。</li>
+          </ol>
+        </div>
+        <div class="help-item">
           <strong>Key 保存在哪里</strong>
           <p>Key 只保存在当前浏览器的本地存储中。生成和查询余额时会发送给生图接口；点击“清除”后，本机保存的 Key 会被删除。</p>
+          <ul class="help-list">
+            <li>每个用户一个独立 Key。</li>
+            <li>请勿共享、转发或公开 Key；因共享导致额度消耗，不补偿。</li>
+          </ul>
         </div>
         <div class="help-item">
           <strong>积分消耗与返还</strong>
@@ -2055,14 +2109,25 @@
               </div>
             </div>
           </div>
+          <p>不同套餐折算单张成本不同，GPT Image 2 低至约 ￥0.15 / 张。价格和积分消耗以后可能随上游服务调整。</p>
         </div>
         <div class="help-item">
           <strong>图片会不会保存</strong>
           <p>页面会在当前浏览器保存生成历史，方便回看结果。清空历史后，本地记录会被删除。</p>
         </div>
         <div class="help-item">
-          <strong>失败怎么办</strong>
-          <p>常见原因包括 Key 错误、余额不足、请求过快、接口繁忙或图片审核未通过。请按页面提示处理。</p>
+          <strong>失败与退款规则</strong>
+          <ul class="help-list">
+            <li>常见失败原因包括 Key 错误、余额不足、请求过快、接口繁忙或图片审核未通过。</li>
+            <li>生成失败且上游未扣费时，不消耗用户额度。</li>
+            <li>图片生成成功但主观不满意，不退款、不补次数。</li>
+            <li>禁止违法、侵权、色情、暴力、诈骗、仿冒证件等用途。</li>
+          </ul>
+        </div>
+        <div class="help-item">
+          <strong>售后联系</strong>
+          <p>购买、补 Key、余额异常和使用问题，请联系微信 qianaiyxs。</p>
+          <button class="btn-sm" type="button" onclick="copyWx()">复制微信号</button>
         </div>
       </div>
     </div>
