@@ -482,6 +482,364 @@
       color: #000;
     }
 
+    .style-library {
+      display: grid;
+      gap: 18px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .style-library-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 18px;
+      padding-bottom: 2px;
+    }
+
+    .style-library-kicker {
+      margin: 0 0 6px;
+      color: var(--text-muted);
+      font-size: 12px;
+      letter-spacing: 0;
+    }
+
+    .style-library-title {
+      margin: 0;
+      color: var(--text-main);
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    .style-library-note {
+      margin: 7px 0 0;
+      max-width: 640px;
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .style-count {
+      flex-shrink: 0;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.72);
+      color: #111111;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .style-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .style-card {
+      position: relative;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: 0 16px 44px rgba(0, 0, 0, 0.07);
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      text-align: left;
+      padding: 0;
+      color: inherit;
+      font: inherit;
+    }
+
+    .style-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(0, 0, 0, 0.2);
+      box-shadow: 0 22px 58px rgba(0, 0, 0, 0.12);
+    }
+
+    .style-card:focus-visible {
+      outline: 3px solid rgba(0, 0, 0, 0.16);
+      outline-offset: 3px;
+    }
+
+    .style-card-image {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: #f0f0f2;
+    }
+
+    .style-card-image img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .style-card-body {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+    }
+
+    .style-card-title {
+      margin: 0;
+      color: #111111;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .style-card-usage {
+      margin: 0;
+      color: #6e6e73;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .style-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .style-tag {
+      max-width: 100%;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: #f5f5f7;
+      color: #111111;
+      border-radius: 999px;
+      padding: 5px 8px;
+      font-size: 11px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .style-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      color: #6e6e73;
+      font-size: 11px;
+      line-height: 1.3;
+    }
+
+    .style-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 220;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      background: rgba(245, 245, 247, 0.92);
+      color: #111111;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+
+    .style-modal.show {
+      display: flex;
+    }
+
+    .style-panel {
+      width: min(980px, 100%);
+      max-height: min(760px, 92vh);
+      overflow: auto;
+      background: rgba(255, 255, 255, 0.97);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 22px;
+      box-shadow: 0 26px 90px rgba(0, 0, 0, 0.18);
+    }
+
+    .style-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 20px 22px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.72);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    .style-panel-title {
+      margin: 0;
+      color: #111111;
+      font-size: 22px;
+      font-weight: 750;
+      line-height: 1.2;
+    }
+
+    .style-panel-subtitle {
+      margin: 7px 0 0;
+      color: #6e6e73;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .style-close {
+      border: none;
+      background: transparent;
+      color: #6e6e73;
+      cursor: pointer;
+      font-size: 15px;
+      padding: 8px 0;
+      white-space: nowrap;
+    }
+
+    .style-close:hover {
+      color: #111111;
+    }
+
+    .style-panel-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+      gap: 20px;
+      padding: 22px;
+    }
+
+    .style-samples {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      align-content: start;
+    }
+
+    .style-sample {
+      overflow: hidden;
+      border-radius: 16px;
+      background: #f5f5f7;
+      aspect-ratio: 4 / 5;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .style-sample:first-child {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    .style-samples.single {
+      grid-template-columns: 1fr;
+    }
+
+    .style-samples.single .style-sample:first-child {
+      grid-column: auto;
+      grid-row: auto;
+      aspect-ratio: 4 / 3;
+    }
+
+    .style-sample img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .style-detail {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .style-detail-section {
+      display: grid;
+      gap: 8px;
+    }
+
+    .style-detail-label {
+      color: #6e6e73;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .style-prompt-box {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: #f5f5f7;
+      border-radius: 16px;
+      color: #111111;
+      padding: 14px;
+      font-size: 13px;
+      line-height: 1.55;
+      font-family: inherit;
+    }
+
+    .style-recommend {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .style-recommend-item {
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: #f5f5f7;
+      border-radius: 14px;
+      padding: 10px;
+      min-width: 0;
+    }
+
+    .style-recommend-label {
+      color: #6e6e73;
+      font-size: 11px;
+      margin-bottom: 5px;
+    }
+
+    .style-recommend-value {
+      color: #111111;
+      font-size: 12px;
+      font-weight: 700;
+      word-break: break-word;
+    }
+
+    .style-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding-top: 2px;
+    }
+
+    .style-action-primary,
+    .style-action-secondary {
+      min-height: 38px;
+      border-radius: 999px;
+      padding: 9px 15px;
+      font-size: 13px;
+      font-weight: 650;
+      cursor: pointer;
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .style-action-primary {
+      border: 1px solid #000000;
+      background: #000000;
+      color: #ffffff;
+    }
+
+    .style-action-primary:hover {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    .style-action-secondary {
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: #ffffff;
+      color: #111111;
+    }
+
+    .style-action-secondary:hover {
+      background: #000000;
+      border-color: #000000;
+      color: #ffffff;
+    }
+
     ::-webkit-scrollbar {
       width: 6px;
     }
@@ -1419,6 +1777,23 @@
       .panel-gallery:empty::before {
         min-height: 260px;
       }
+
+      .style-library-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .style-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .style-panel-body {
+        grid-template-columns: 1fr;
+      }
+
+      .style-panel {
+        max-height: 92vh;
+      }
     }
 
     @media (max-width: 600px) {
@@ -1469,6 +1844,57 @@
       }
 
       .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .style-library-title {
+        font-size: 21px;
+      }
+
+      .style-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .style-card {
+        border-radius: 16px;
+      }
+
+      .style-card-body {
+        padding: 13px;
+      }
+
+      .style-modal {
+        padding: 12px;
+      }
+
+      .style-panel {
+        border-radius: 18px;
+      }
+
+      .style-panel-header {
+        padding: 16px;
+      }
+
+      .style-panel-body {
+        padding: 16px;
+      }
+
+      .style-panel-title {
+        font-size: 19px;
+      }
+
+      .style-samples,
+      .style-recommend {
+        grid-template-columns: 1fr;
+      }
+
+      .style-sample:first-child {
+        grid-column: auto;
+        grid-row: auto;
+      }
+
+      .style-actions {
+        display: grid;
         grid-template-columns: 1fr;
       }
     }
@@ -1560,7 +1986,19 @@
       <button class="btn-secondary" id="cancelTask" type="button" hidden>取消本次生成</button>
     </aside>
 
-    <main class="panel-gallery" id="gallery"></main>
+    <main class="panel-gallery" id="gallery">
+      <section class="style-library" id="styleLibrary" aria-label="风格示例库">
+        <div class="style-library-head">
+          <div>
+            <p class="style-library-kicker">Style Library</p>
+            <h2 class="style-library-title">风格示例库</h2>
+            <p class="style-library-note">挑选喜欢的视觉方向，查看示例和 Prompt 模板，再一键套用到当前生成设置。</p>
+          </div>
+          <span class="style-count" id="styleCount">12 个精选风格</span>
+        </div>
+        <div class="style-grid" id="styleGrid"></div>
+      </section>
+    </main>
   </div>
 
   <!-- History Modal -->
@@ -1630,6 +2068,53 @@
     </div>
   </div>
 
+  <div class="style-modal" id="styleModal">
+    <div class="style-panel">
+      <div class="style-panel-header">
+        <div>
+          <h3 class="style-panel-title" id="styleModalTitle">风格详情</h3>
+          <p class="style-panel-subtitle" id="styleModalSubtitle"></p>
+        </div>
+        <button class="style-close" id="styleModalClose" type="button">✕ 关闭</button>
+      </div>
+      <div class="style-panel-body">
+        <div class="style-samples" id="styleModalSamples"></div>
+        <div class="style-detail">
+          <div class="style-tags" id="styleModalTags"></div>
+          <div class="style-detail-section">
+            <div class="style-detail-label">Prompt 模板</div>
+            <pre class="style-prompt-box" id="styleModalPrompt"></pre>
+          </div>
+          <div class="style-detail-section">
+            <div class="style-detail-label">推荐设置</div>
+            <div class="style-recommend">
+              <div class="style-recommend-item">
+                <div class="style-recommend-label">模型</div>
+                <div class="style-recommend-value" id="styleModalModel"></div>
+              </div>
+              <div class="style-recommend-item">
+                <div class="style-recommend-label">画幅</div>
+                <div class="style-recommend-value" id="styleModalRatio"></div>
+              </div>
+              <div class="style-recommend-item">
+                <div class="style-recommend-label">分辨率</div>
+                <div class="style-recommend-value" id="styleModalSize"></div>
+              </div>
+            </div>
+          </div>
+          <div class="style-detail-section">
+            <div class="style-detail-label">适用说明</div>
+            <p class="style-panel-subtitle" id="styleModalNote"></p>
+          </div>
+          <div class="style-actions">
+            <button class="style-action-primary" id="styleUseBtn" type="button">使用此风格</button>
+            <button class="style-action-secondary" id="styleCopyBtn" type="button">复制 Prompt</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="lightbox" id="lightbox">
     <div class="lb-header">
       <span id="lbInfo">Preview</span>
@@ -1663,6 +2148,165 @@
       const STORE_SIZE = 'grsai_pro:size';
       const STORE_MODEL = 'grsai_pro:model';
       const HISTORY_KEY = 'grsai_pro:history';
+
+      const STYLE_PRESETS = [
+        {
+          id: 'xiaohongshu-profile-card',
+          title: '3D 小红书资料卡',
+          usage: '个人主页、社媒头像、博主视觉',
+          tags: ['小红书', '3D', '粉彩'],
+          model: 'gpt-image-2',
+          ratio: '1:1',
+          size: '4K',
+          subject: '一个女孩',
+          template: '{主体}坐在一张 3D 小红书个人资料卡的方形镂空边缘，手中握着这张卡片，温暖米色和柔和粉彩美学背景，逼真的深度和阴影，电影般柔和光线，闪亮光滑纹理，小红书风格 UI，漂浮的点赞、评论、分享互动图标，霓虹发光效果，闪光和光晕，背景有书籍、花瓶里的花、复古相机，梦幻氛围，Pixar 风格与半现实主义融合，居中构图，高端影响者美学，4K',
+          note: '适合做个人主页风格图、博主形象图和社媒封面。',
+          images: ['data/style-examples/style-01-xiaohongshu-profile.png']
+        },
+        {
+          id: 'vr-exploded-poster',
+          title: '产品爆炸视图海报',
+          usage: '数码产品、结构展示、科技海报',
+          tags: ['爆炸图', '科技', '3D'],
+          model: 'gpt-image-2',
+          ratio: '4:3',
+          size: '4K',
+          subject: 'VR 头显',
+          template: '为{主体}生成一张产品爆炸视图海报，简洁高科技 3D 渲染，摄影棚灯光，发光装饰，柔和紫蓝色渐变背景。主体为垂直堆叠爆炸视图，展示外壳、摄像头传感器、芯片主板、Pancake 透镜、内部框架、电池组、侧带、顶部头带和面部接口衬垫。两侧加入精致 callout 标注线和信息模块，底部保留品牌说明区，整体像高端科技产品发布海报。',
+          note: '适合科技产品、硬件结构展示和高端参数说明图。',
+          images: ['data/style-examples/style-02-vr-exploded-poster.png']
+        },
+        {
+          id: 'chibi-diary-photo',
+          title: 'Q版分身手账照',
+          usage: '真人生活照、自拍、穿搭、旅行照',
+          tags: ['手账', 'Q版', '贴纸'],
+          model: 'gpt-image-2',
+          ratio: '4:3',
+          size: '4K',
+          subject: '用户上传的真人生活照片',
+          template: '请根据用户上传的真人生活照片，创作一张高完成度的 Q版分身手账照 / Chibi Sticker Diary Photo。保留原图真人主体、脸部特征、发型、服装、姿势、光线和背景环境，不要换脸，不要把真人主体变成插画。在人物四周添加 5-8 个同一人物的 Q版迷你分身，cute chibi / kawaii sticker style，大头小身、大眼睛、表情丰富，每个分身有不同动作和情绪。加入白色描边、柔和阴影、手绘涂鸦、hearts、stars、sparkles、arrows、speech bubbles 和 5-8 句轻松可爱的手写短句。整体为真实照片增强 + 可爱贴纸手账风，清爽、有层次、适合社交媒体发布。',
+          note: '需要先上传真人生活照片，效果会围绕原图主题自动扩展。',
+          images: ['data/style-examples/style-03-chibi-diary-photo.png']
+        },
+        {
+          id: 'packaging-proposal-board',
+          title: '手绘包装提案板',
+          usage: '产品包装、品牌提案、概念展示',
+          tags: ['包装', '草图', '提案板'],
+          model: 'gpt-image-2',
+          ratio: '3:4',
+          size: '4K',
+          subject: '一款植物气泡茶产品',
+          template: '请为{主体}生成一张“手绘包装提案板风格”的产品介绍海报。画面融合产品成品图、包装设计草图和品牌概念开发过程，像设计师正在展示包装概念方案。中央放置最完整、最吸睛的产品主视觉，具有真实质感、立体光影和商业成品效果。周围加入不同角度的包装草图、结构草图、局部造型探索、手持展示小稿、包装展开思路、品牌字样排版试验。加入自然随性的黑色或深色手绘线稿、箭头、圈画、符号、手写中文批注，形成高级品牌设计提案板、moodboard、创意评审稿效果。',
+          note: '适合包装灵感、品牌提案和产品视觉开发。可先上传产品图来保留真实外观。',
+          images: ['data/style-examples/style-04-packaging-proposal-board.png']
+        },
+        {
+          id: 'geometric-product-poster',
+          title: '极简几何装置产品海报',
+          usage: '电商主视觉、品牌 KV、产品展示',
+          tags: ['极简', '几何', '产品'],
+          model: 'gpt-image-2',
+          ratio: '3:4',
+          size: '4K',
+          subject: '一款柑橘气泡饮',
+          template: '请为{主体}创作一张“极简几何装置风产品海报”。高键白色或暖白色摄影棚背景，干净通透、柔和明亮。画面包含产品本体、产品包装、相关原料或材质细节。加入圆柱、方块、长条块、圆环、球体、半圆、平台、亚克力支架等几何装置道具，用于承托、悬置、围绕或衬托产品主体。整体配色围绕产品本身展开，搭配白色、奶油色、浅灰色和少量产品关联色。材质细腻真实，有轻微反射和柔和阴影，留白充足，像高审美品牌产品 KV 海报。',
+          note: '适合饮品、美妆、日用品、食品等产品的高级主视觉。',
+          images: ['data/style-examples/style-05-geometric-product-poster.png']
+        },
+        {
+          id: 'food-hero-explainer',
+          title: '美食英雄说明书海报',
+          usage: '餐饮新品、菜单主图、外卖推广',
+          tags: ['美食', '说明书', '广告'],
+          model: 'gpt-image-2',
+          ratio: '2:3',
+          size: '4K',
+          subject: '用户上传的食物图片',
+          template: '请根据用户上传的食物图片，创作一张高完成度的“美食英雄说明书海报 / Food Hero Explainer Poster”。严格保留原食物类型、主体外观、摆盘方式、主要食材、色泽和真实质感，只优化打光、清晰度、阴影层次、空间感和商业摄影质感。背景使用暖米白、奶油白、浅暖 beige。版式包含顶部品牌区、中上部产品标题、中央大尺寸主食物视觉、左侧成分说明区、右侧卖点说明区、底部价格与转化按钮、最底部中文社交引导区。整体 premium、clean、modern、polished、appetizing，适合餐饮品牌推广。',
+          note: '需要先上传食物图，适合把单品图包装成完整餐饮广告。',
+          images: ['data/style-examples/style-06-food-hero-explainer.png']
+        },
+        {
+          id: 'nail-inspiration-board',
+          title: 'AI 美甲灵感方案',
+          usage: '美甲提案、灵感转译、款式展示',
+          tags: ['美甲', '提案板', '上手效果'],
+          model: 'gpt-image-2',
+          ratio: '4:3',
+          size: '4K',
+          subject: '暗夜玫瑰主题',
+          template: '请根据用户输入的主题或上传的参考图片，创作一张横向 4:3 的高完成度“AI美甲灵感方案 / AI Nail Inspiration Board”。顶部标题写“AI美甲灵感方案”，包含灵感来源区、视觉元素提取区、色彩系统、关键词、图案与符号、材质与工艺、10 指甲设计区、风格总结区、推荐甲型 / 工艺 / 场景区、实际上手效果区和底部总结区。核心展示左手 5 枚、右手 5 枚完整美甲设计，并生成真实自然的双手上手效果。整体像高端美甲品牌视觉、时尚杂志内页、专业设计提案板，背景干净克制、留白舒服。',
+          note: '适合把任意主题转译成完整美甲方案。可输入主题，也可上传参考图。',
+          images: ['data/style-examples/style-07-nail-inspiration-board.png']
+        },
+        {
+          id: 'vocabulary-scrapbook',
+          title: '看图学单词手账照',
+          usage: '生活照片、英语学习、社媒笔记',
+          tags: ['英语', '手账', '标注'],
+          model: 'gpt-image-2',
+          ratio: '4:3',
+          size: '4K',
+          subject: '用户上传的生活照片',
+          template: '请根据用户上传的生活照片，创作一张高完成度的“看图学单词手账照 / Photo Vocabulary Scrapbook”。保留原图真实感、主体内容、人物、场景、物体摆放关系、光线氛围和生活感。自动识别 5-6 个清晰、常见、适合英语初学者学习的日常物品，用白色细线手绘风格圈出物品，并为每个物品添加英文单词和一句 4-8 个词左右的 A1-A2 简短英文例句。加入少量白色 stars、sparkles、arrows、circles、underlines 等手账辅助元素。整体清爽、自然、像社交媒体上的轻学习 scrapbook。',
+          note: '需要先上传生活照片，适合把日常图变成英语学习笔记。',
+          images: ['data/style-examples/style-08-vocabulary-scrapbook.png']
+        },
+        {
+          id: 'facial-upgrade-report',
+          title: 'AI 五官美学升级报告',
+          usage: '正面形象照、面部分析、医美咨询感报告',
+          tags: ['报告', 'Before After', '标注'],
+          model: 'gpt-image-2',
+          ratio: '4:3',
+          size: '4K',
+          subject: '用户上传的正面形象照片',
+          template: '请基于用户上传的正面形象照片，生成一张横向 4:3 的高完成度“AI 五官美学升级报告 / Before & After Facial Aesthetic Upgrade Report”。严格保留本人身份特征、脸部辨识度、五官核心轮廓、年龄感、皮肤真实纹理和整体气质，不换头，不做模板网红脸。中央为 Before / After 双脸主视觉，左侧保留真实原始状态，右侧为同一人的自然美学升级模拟，更精神、更清爽、更立体、更精致。After 脸上加入编号圆点、细线箭头和局部放大注释，标注眉毛、眼部、鼻部、面部轮廓、唇部口周、皮肤质感六个区域。底部加入优先级矩阵和专业免责声明。整体高端、干净、专业。',
+          note: '需要上传正面形象照。输出仅作为视觉提案，不替代专业面诊。',
+          images: ['data/style-examples/style-09-facial-upgrade-report.png']
+        },
+        {
+          id: 'energy-streetwear-campaign',
+          title: 'ENERGY 街头服饰广告',
+          usage: '潮流服饰、科技时尚、广告大片',
+          tags: ['街头', '广告', '游戏手柄'],
+          model: 'gpt-image-2',
+          ratio: '4:3',
+          size: '4K',
+          subject: '一个自信运动感女孩',
+          template: 'Luxury futuristic streetwear campaign poster featuring {主体} sitting on a gigantic oversized retro gaming controller, clean editorial advertising aesthetic, massive bold typography in the background saying “ENERGY”, glossy reflective floor, cinematic studio lighting, pastel neon color palette with lavender, silver, and soft cyan tones. The girl has curly shoulder-length hair, relaxed confident attitude, oversized white graphic T-shirt, loose black athletic shorts, high white socks, modern sneakers, natural makeup, youthful Gen-Z streetwear vibe. Ultra detailed futuristic gaming controller with glowing accents, premium matte materials, soft LED reflections, luxury tech-fashion advertisement aesthetic, symmetrical 4:3 composition, hyper detailed, photorealistic.',
+          note: '适合潮流品牌、游戏外设、运动科技类广告图。',
+          images: ['data/style-examples/style-10-energy-streetwear-campaign.png']
+        },
+        {
+          id: 'cozy-study-scrapbook',
+          title: '电影感学习氛围照',
+          usage: '学习打卡、校园氛围、Pinterest 风格图',
+          tags: ['学习', '秋日', '手账'],
+          model: 'gpt-image-2',
+          ratio: '4:3',
+          size: '4K',
+          subject: '一个长发亚洲女孩',
+          template: 'Dreamy cinematic study aesthetic, {主体} studying outdoors at a wooden table during golden hour, cozy oversized green sweater and scarf, writing in notebook beside open laptop, historic university campus in background, warm sunset lighting, soft glow, autumn atmosphere, aesthetic doodles and handwritten notes floating around image, kawaii scrapbook style overlays, pastel hearts and stars, motivational text, shallow depth of field, nostalgic film grain, soft beige and warm green tones, peaceful productive vibe, ultra detailed, Pinterest aesthetic, photorealistic, cozy academia style, 35mm film look',
+          note: '适合学习打卡、校园氛围图和生活方式封面。',
+          images: ['data/style-examples/style-11-cozy-study-scrapbook.png']
+        },
+        {
+          id: 'trending-anime-transform',
+          title: '高能动漫转绘',
+          usage: '人物转绘、表情夸张、搞笑动感图',
+          tags: ['动漫', '夸张', '动感'],
+          model: 'gpt-image-2',
+          ratio: '4:3',
+          size: '4K',
+          subject: '用户上传的主体',
+          template: 'Create a trending anime art style image from the uploaded subject. Use confident line-work with slight variation and minimal cel shading using flat shadow shapes. Use bright, saturated colors and clean graphic lighting. The style is defined by exaggerated, cartoonish character proportions featuring highly expressive, simplistic facial features that allow for immense emotional range, with highly varied stretched anatomy. Transform the environment into a slightly warped space with playful perspective distortion and simplified objects. Composition and tone should be energetic, lively, and comedic in a fully stylized, non-realistic world.',
+          note: '适合上传人物、宠物或物体后做高能动漫风转绘。',
+          images: ['data/style-examples/style-12-trending-anime-transform.png']
+        },
+      ];
 
       // 轮询配置
       const POLL_INTERVAL = 5000; // 5秒
@@ -1708,7 +2352,22 @@
         historyNext: el('historyNext'),
         historyPageInfo: el('historyPageInfo'),
         clearHistory: el('clearHistory'),
-        wxCopyToast: el('wxCopyToast')
+        wxCopyToast: el('wxCopyToast'),
+        styleGrid: el('styleGrid'),
+        styleCount: el('styleCount'),
+        styleModal: el('styleModal'),
+        styleModalTitle: el('styleModalTitle'),
+        styleModalSubtitle: el('styleModalSubtitle'),
+        styleModalSamples: el('styleModalSamples'),
+        styleModalTags: el('styleModalTags'),
+        styleModalPrompt: el('styleModalPrompt'),
+        styleModalModel: el('styleModalModel'),
+        styleModalRatio: el('styleModalRatio'),
+        styleModalSize: el('styleModalSize'),
+        styleModalNote: el('styleModalNote'),
+        styleModalClose: el('styleModalClose'),
+        styleUseBtn: el('styleUseBtn'),
+        styleCopyBtn: el('styleCopyBtn')
       };
 
       let refImages = []; // 参考图数据 (base64)
@@ -1720,6 +2379,7 @@
       let currentPollTimer = null;
       let activeTaskId = '';
       let activePrompt = '';
+      let currentStylePreset = null;
 
       // ====== 初始化：加载缓存 ======
       ui.key.value = localStorage.getItem(STORE_KEY) || '';
@@ -1804,6 +2464,7 @@
         ui.size.style.cursor = '';
       }
       updateSizeAvailability();
+      renderStyleLibrary();
 
       // ====== 交互逻辑：文件上传 ======
       ui.drop.onclick = () => ui.fileInput.click();
@@ -1864,6 +2525,100 @@
           .replace(/"/g, '&quot;')
           .replace(/'/g, '&#039;');
       }
+
+      function getModelLabel(value) {
+        if (value === 'gpt-image-2') return 'GPT Image 2';
+        if (value === 'nano-banana-pro') return 'Nano Banana Pro';
+        return value || '默认';
+      }
+
+      function buildStylePrompt(preset) {
+        const subject = ui.prompt.value.trim() || preset.subject;
+        return preset.template.replace('{主体}', subject);
+      }
+
+      function renderStyleLibrary() {
+        if (!ui.styleGrid) return;
+        ui.styleCount.textContent = `${STYLE_PRESETS.length} 个精选风格`;
+        ui.styleGrid.innerHTML = STYLE_PRESETS.map((preset) => `
+          <button class="style-card" type="button" data-style-id="${preset.id}" aria-label="查看${escapeHtml(preset.title)}风格">
+            <div class="style-card-image">
+              <img src="${preset.images[0]}" alt="${escapeHtml(preset.title)}示例" loading="lazy">
+            </div>
+            <div class="style-card-body">
+              <div>
+                <h3 class="style-card-title">${escapeHtml(preset.title)}</h3>
+                <p class="style-card-usage">${escapeHtml(preset.usage)}</p>
+              </div>
+              <div class="style-tags">
+                ${preset.tags.map(tag => `<span class="style-tag">${escapeHtml(tag)}</span>`).join('')}
+              </div>
+              <div class="style-meta">
+                <span>${escapeHtml(getModelLabel(preset.model))}</span>
+                <span>${escapeHtml(preset.ratio)}</span>
+                <span>${escapeHtml(preset.size)}</span>
+              </div>
+            </div>
+          </button>
+        `).join('');
+
+        ui.styleGrid.querySelectorAll('.style-card').forEach((card) => {
+          card.addEventListener('click', () => openStyleDetail(card.dataset.styleId));
+        });
+      }
+
+      function openStyleDetail(styleId) {
+        const preset = STYLE_PRESETS.find(item => item.id === styleId);
+        if (!preset) return;
+        currentStylePreset = preset;
+        ui.styleModalTitle.textContent = preset.title;
+        ui.styleModalSubtitle.textContent = preset.usage;
+        ui.styleModalSamples.classList.toggle('single', preset.images.length === 1);
+        ui.styleModalSamples.innerHTML = preset.images.map((src, index) => `
+          <div class="style-sample">
+            <img src="${src}" alt="${escapeHtml(preset.title)}示例 ${index + 1}" loading="lazy">
+          </div>
+        `).join('');
+        ui.styleModalTags.innerHTML = preset.tags.map(tag => `<span class="style-tag">${escapeHtml(tag)}</span>`).join('');
+        ui.styleModalPrompt.textContent = buildStylePrompt(preset);
+        ui.styleModalModel.textContent = getModelLabel(preset.model);
+        ui.styleModalRatio.textContent = preset.ratio;
+        ui.styleModalSize.textContent = preset.size;
+        ui.styleModalNote.textContent = preset.note;
+        ui.styleModal.classList.add('show');
+      }
+
+      function closeStyleDetail() {
+        ui.styleModal.classList.remove('show');
+      }
+
+      function applyStylePreset() {
+        if (!currentStylePreset) return;
+        ui.prompt.value = buildStylePrompt(currentStylePreset);
+        ui.model.value = currentStylePreset.model;
+        ui.ratio.value = currentStylePreset.ratio;
+        ui.size.value = currentStylePreset.size;
+        localStorage.setItem(STORE_MODEL, currentStylePreset.model);
+        localStorage.setItem(STORE_RATIO, currentStylePreset.ratio);
+        localStorage.setItem(STORE_SIZE, currentStylePreset.size);
+        updateSizeAvailability();
+        closeStyleDetail();
+        msg(`已套用风格：${currentStylePreset.title}`);
+        ui.prompt.focus();
+      }
+
+      function copyStylePrompt() {
+        if (!currentStylePreset) return;
+        copyText(buildStylePrompt(currentStylePreset), 'Prompt 已复制');
+      }
+
+      window.openStyleDetail = openStyleDetail;
+      ui.styleModalClose.onclick = closeStyleDetail;
+      ui.styleUseBtn.onclick = applyStylePreset;
+      ui.styleCopyBtn.onclick = copyStylePrompt;
+      ui.styleModal.onclick = (e) => {
+        if (e.target === ui.styleModal) closeStyleDetail();
+      };
 
       function friendlyError(message, status) {
         const raw = String(message || '').trim();
@@ -2638,6 +3393,10 @@
         if (e.key === 'Escape' && ui.historyModal.classList.contains('show')) {
           closeHistory();
         }
+
+        if (e.key === 'Escape' && ui.styleModal.classList.contains('show')) {
+          closeStyleDetail();
+        }
       });
 
       // 下载功能
@@ -2671,7 +3430,7 @@
         }
       };
 
-      async function copyText(text, successText = '已复制') {
+      async function copyText(text, successText = '已复制', failureText = '复制失败，请手动复制内容') {
         try {
           if (navigator.clipboard && window.isSecureContext) {
             await navigator.clipboard.writeText(text);
@@ -2689,13 +3448,13 @@
           msg(successText);
           return true;
         } catch (e) {
-          msg('复制失败，请手动复制 qianaiyxs', true);
+          msg(failureText, true);
           return false;
         }
       }
 
       window.copyWx = async () => {
-        const ok = await copyText('qianaiyxs', '微信号已复制');
+        const ok = await copyText('qianaiyxs', '微信号已复制', '复制失败，请手动复制 qianaiyxs');
         if (!ok || !ui.wxCopyToast) return;
         ui.wxCopyToast.classList.add('show');
         clearTimeout(ui.wxCopyToast._timer);
