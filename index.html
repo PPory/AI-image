@@ -62,6 +62,7 @@
       grid-template-columns: 380px 1fr;
       gap: 24px;
       height: 100%;
+      min-height: 0;
       max-width: 1600px;
       margin: 0 auto;
       padding: 24px;
@@ -89,7 +90,9 @@
       gap: 18px;
       /* 增加间距 */
       overflow-y: auto;
+      overscroll-behavior: contain;
       height: 100%;
+      min-height: 0;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     }
 
@@ -358,6 +361,9 @@
     .panel-gallery {
       flex: 1;
       overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-gutter: stable;
+      min-height: 0;
       padding-right: 4px;
       display: flex;
       flex-direction: column;
@@ -555,7 +561,6 @@
     }
 
     .style-card:hover {
-      transform: translateY(-3px);
       border-color: rgba(0, 0, 0, 0.2);
       box-shadow: 0 22px 58px rgba(0, 0, 0, 0.12);
     }
@@ -1448,9 +1453,73 @@
       gap: 7px;
     }
 
-    .key-input-row input {
+    .key-input-wrap {
+      position: relative;
       flex: 1;
       min-width: 0;
+    }
+
+    .key-input-wrap input {
+      -webkit-appearance: none;
+      appearance: none;
+      flex: 1;
+      min-width: 0;
+      width: 100%;
+      height: 42px;
+      padding: 0 48px 0 14px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 14px;
+      outline: none;
+      background: #ffffff;
+      color: #111111;
+      box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.02);
+      font-size: 13px;
+      letter-spacing: 0;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .key-input-wrap input:focus {
+      border-color: #000000;
+      box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.07);
+      background: #ffffff;
+    }
+
+    .key-visibility-toggle {
+      position: absolute;
+      top: 50%;
+      right: 6px;
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      border: none;
+      border-radius: 999px;
+      background: transparent;
+      color: #6e6e73;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: background 0.18s ease, color 0.18s ease;
+      transform: translateY(-50%);
+    }
+
+    .key-visibility-toggle:hover {
+      background: rgba(0, 0, 0, 0.07);
+      color: #111111;
+    }
+
+    .key-visibility-toggle svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+
+    .key-visibility-toggle .eye-slash {
+      opacity: 0;
+      transition: opacity 0.18s ease;
+    }
+
+    .key-visibility-toggle.is-visible .eye-slash {
+      opacity: 1;
     }
 
     .key-help,
@@ -1684,6 +1753,18 @@
       font-weight: 500;
     }
 
+    .pricing-unit {
+      width: fit-content;
+      border: 1px solid rgba(31, 94, 255, 0.18);
+      background: rgba(31, 94, 255, 0.08);
+      color: #1f5eff;
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1;
+    }
+
     .refund-row {
       display: flex;
       gap: 6px;
@@ -1827,7 +1908,7 @@
         flex-wrap: wrap;
       }
 
-      .key-input-row input {
+      .key-input-wrap {
         flex-basis: 100%;
       }
 
@@ -1989,7 +2070,16 @@
         <div class="key-label">API Key</div>
         <p class="key-help">填写你自己的生图 API Key。它只保存在当前浏览器，生成和查询余额时发送给生图接口。</p>
         <div class="key-input-row">
-          <input type="password" id="userKey" placeholder="sk-..." style="height:34px;">
+          <div class="key-input-wrap">
+            <input type="password" id="userKey" placeholder="sk-..." autocomplete="off">
+            <button class="key-visibility-toggle" id="toggleKeyVisibility" type="button" aria-label="显示 API Key" title="显示 API Key">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"></path>
+                <circle cx="12" cy="12" r="2.8"></circle>
+                <path class="eye-slash" d="M4.5 4.5 19.5 19.5"></path>
+              </svg>
+            </button>
+          </div>
         </div>
         <div class="key-actions-row">
           <button class="btn-sm" id="saveKey" type="button">保存 Key</button>
@@ -2059,17 +2149,20 @@
             <div class="pricing-card">
               <div class="pricing-name">体验包</div>
               <div class="pricing-points">￥9.9</div>
-              <p>3000 积分，GPT Image 2 约 50 张。</p>
+              <p>4000 积分，GPT Image 2 约 66 张。</p>
+              <div class="pricing-unit">约 ￥0.15 / 张</div>
             </div>
             <div class="pricing-card">
               <div class="pricing-name">常用包</div>
               <div class="pricing-points">￥19.9</div>
-              <p>7000 积分，GPT Image 2 约 116 张。</p>
+              <p>9000 积分，GPT Image 2 约 150 张。</p>
+              <div class="pricing-unit">约 ￥0.13 / 张</div>
             </div>
             <div class="pricing-card">
               <div class="pricing-name">高级包</div>
               <div class="pricing-points">￥39.9</div>
-              <p>16000 积分，GPT Image 2 约 266 张。</p>
+              <p>24000 积分，GPT Image 2 约 400 张。</p>
+              <div class="pricing-unit">约 ￥0.10 / 张</div>
             </div>
           </div>
         </div>
@@ -2109,7 +2202,7 @@
               </div>
             </div>
           </div>
-          <p>不同套餐折算单张成本不同，GPT Image 2 低至约 ￥0.15 / 张。价格和积分消耗以后可能随上游服务调整。</p>
+          <p>不同套餐折算单张成本不同，GPT Image 2 低至约 ￥0.10 / 张。价格和积分消耗以后可能随上游服务调整。</p>
         </div>
         <div class="help-item">
           <strong>图片会不会保存</strong>
@@ -2389,6 +2482,7 @@
         ratio: el('ratioSelect'),
         size: el('sizeSelect'),
         key: el('userKey'),
+        toggleKeyVisibility: el('toggleKeyVisibility'),
         saveKey: el('saveKey'),
         queryCredits: el('queryCredits'),
         clearKey: el('clearKey'),
@@ -2463,8 +2557,20 @@
 
       ui.clearKey.onclick = () => {
         ui.key.value = '';
+        ui.key.type = 'password';
+        ui.toggleKeyVisibility.classList.remove('is-visible');
+        ui.toggleKeyVisibility.setAttribute('aria-label', '显示 API Key');
+        ui.toggleKeyVisibility.title = '显示 API Key';
         localStorage.removeItem(STORE_KEY);
         msg('已清除本机保存的 Key');
+      };
+
+      ui.toggleKeyVisibility.onclick = () => {
+        const willShow = ui.key.type === 'password';
+        ui.key.type = willShow ? 'text' : 'password';
+        ui.toggleKeyVisibility.classList.toggle('is-visible', willShow);
+        ui.toggleKeyVisibility.setAttribute('aria-label', willShow ? '隐藏 API Key' : '显示 API Key');
+        ui.toggleKeyVisibility.title = willShow ? '隐藏 API Key' : '显示 API Key';
       };
 
       window.openHelpModal = () => ui.helpModal.classList.add('show');
