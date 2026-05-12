@@ -25,9 +25,9 @@ start index.html
 ## 主要功能
 
 - 输入 Prompt 生成图片
-- 支持 `GPT Image 2` 和 `Nano Banana Pro`
+- 支持 `GPT Image 2`、`GPT Image 2 VIP` 和 `Nano Banana Pro`
 - 支持画幅比例选择
-- 支持 `1K`、`2K`、`4K` 分辨率选择
+- 支持按模型联动分辨率：`GPT Image 2` 只用 `1K`，`GPT Image 2 VIP` 只用 `2K/4K`，`Nano Banana Pro` 支持 `1K/2K/4K`
 - 支持上传参考图或待编辑图片
 - 支持保存、查询和清除 API Key
 - 支持取消当前生成任务
@@ -53,12 +53,17 @@ start index.html
 
 当前页面使用这些接口：
 
-- 生成接口：`https://grsai.dakka.com.cn/v1/draw/completions`
-- Nano Banana Pro 接口：`https://grsai.dakka.com.cn/v1/draw/nano-banana`
-- 结果查询接口：`https://grsai.dakka.com.cn/v1/draw/result`
+- 生成接口：`https://grsai.dakka.com.cn/v1/api/generate`
+- 结果查询接口：`https://grsai.dakka.com.cn/v1/api/result?id=任务ID`
 - 余额查询接口：`https://grsai.dakka.com.cn/client/openapi/getAPIKeyCredits`
 
 请求使用用户填写的 Key，通过 `Authorization: Bearer <key>` 或请求体发送。
+
+页面积分展示采用 `Grsai 官方积分 / 10`：
+
+- `GPT Image 2`：60 积分 / 次，只用于 1K。
+- `GPT Image 2 VIP`：130 积分 / 次，用于 2K / 4K。
+- `Nano Banana Pro`：180 积分 / 次，用于 1K / 2K / 4K。
 
 ## 维护注意事项
 
@@ -66,10 +71,12 @@ start index.html
 - 修改界面、样式、文案或脚本时，优先在 `index.html` 内完成。
 - 不要拆分文件，除非用户明确要求重构。
 - 不要改动 Key 保存逻辑，除非用户明确要求。
-- 调整接口参数时，同步检查页面说明、错误提示和历史记录状态。
-- 当前上传区域允许最多 8 张图，但生成请求实际只取第一张图片发送给接口；如需多图编辑，需要同步改请求逻辑和说明文案。
+- 调整接口参数时，同步检查页面说明、错误提示、历史记录状态和 `docs/launch-playbook.md`。
+- 当前上传区域允许最多 8 张图，新生成接口通过 `images` 数组发送参考图。
 - `data/` 是已使用目录；`output/`、`docs/` 仍是约定目录，当前仓库中未实际创建。
 - `data/style-examples/` 存放风格示例库使用的本地 PNG 图片。
+- `docs/launch-playbook.md` 是公众号和小红书开卖执行手册。
+- `docs/launch-tracker.csv` 是手工记录内容发布、咨询、成交和售后的表格模板。
 - `PLAN.md` 和 `风格图库.txt` 是本地运营/素材文件，已加入 `.gitignore`，不要上传公开仓库。
 - `PUBLIC_R2_DOMAIN`、部分端点常量和辅助函数当前保留在脚本中，但实际请求位置仍有直接写死的 URL。改接口时需要全局搜索确认。
 
@@ -80,6 +87,7 @@ start index.html
 - `index.html` 能直接打开
 - 页面没有明显布局错位
 - Prompt、模型、比例、分辨率控件可用
+- 模型和分辨率联动正确：GPT Image 2 仅 1K，GPT Image 2 VIP 仅 2K/4K，Nano Banana Pro 可选 1K/2K/4K
 - API Key 保存、清除、余额查询按钮可点击
 - 参考图上传、缩略图展示和删除可用
 - 历史弹窗可打开和关闭

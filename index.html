@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-  <meta name="description" content="Pory.AI绘图是一个由用户自填生图 API Key 的在线图片生成工具，支持 GPT Image 2 和 Nano Banana Pro。">
+  <meta name="description" content="Pory.AI绘图是一个由用户自填生图 API Key 的在线图片生成工具，支持 GPT Image 2、GPT Image 2 VIP 和 Nano Banana Pro。">
   <meta property="og:title" content="Pory.AI绘图">
   <meta property="og:description" content="输入提示词，使用自己的生图 API Key 生成图片。">
   <meta property="og:type" content="website">
@@ -1781,6 +1781,40 @@
       font-weight: 600;
     }
 
+    .package-compare-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 16px;
+      background: #ffffff;
+    }
+
+    .package-compare {
+      width: 100%;
+      min-width: 620px;
+      border-collapse: collapse;
+      font-size: 12px;
+      color: #111111;
+    }
+
+    .package-compare th,
+    .package-compare td {
+      padding: 10px 11px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .package-compare th {
+      color: #6e6e73;
+      font-weight: 650;
+      background: #f5f5f7;
+    }
+
+    .package-compare tr:last-child td {
+      border-bottom: none;
+    }
+
     .help-list,
     .help-steps {
       margin: 0;
@@ -2029,6 +2063,7 @@
         <label>模型</label>
         <select id="modelSelect">
           <option value="gpt-image-2" selected>GPT Image 2</option>
+          <option value="gpt-image-2-vip">GPT Image 2 VIP</option>
           <option value="nano-banana-pro">Nano Banana Pro</option>
         </select>
       </div>
@@ -2051,9 +2086,9 @@
       <div class="inline-row">
         <label>分辨率</label>
         <select id="sizeSelect">
-          <option value="1K">1K 标准</option>
+          <option value="1K" selected>1K 标准</option>
           <option value="2K">2K 高清</option>
-          <option value="4K" selected>4K 超清</option>
+          <option value="4K">4K 超清</option>
         </select>
       </div>
 
@@ -2149,21 +2184,53 @@
             <div class="pricing-card">
               <div class="pricing-name">体验包</div>
               <div class="pricing-points">￥9.9</div>
-              <p>4000 积分，GPT Image 2 约 66 张。</p>
+              <p>4000 积分，GPT Image 2 1K 约 66 张。</p>
               <div class="pricing-unit">约 ￥0.15 / 张</div>
             </div>
             <div class="pricing-card">
               <div class="pricing-name">常用包</div>
               <div class="pricing-points">￥19.9</div>
-              <p>9000 积分，GPT Image 2 约 150 张。</p>
+              <p>9000 积分，GPT Image 2 1K 约 150 张。</p>
               <div class="pricing-unit">约 ￥0.13 / 张</div>
             </div>
             <div class="pricing-card">
               <div class="pricing-name">高级包</div>
               <div class="pricing-points">￥39.9</div>
-              <p>24000 积分，GPT Image 2 约 400 张。</p>
+              <p>24000 积分，GPT Image 2 1K 约 400 张。</p>
               <div class="pricing-unit">约 ￥0.10 / 张</div>
             </div>
+          </div>
+          <div class="package-compare-wrap">
+            <table class="package-compare">
+              <thead>
+                <tr>
+                  <th>套餐</th>
+                  <th>GPT Image 2 1K</th>
+                  <th>GPT Image 2 VIP 2K/4K</th>
+                  <th>Nano Banana Pro</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>体验包 4000 积分</td>
+                  <td>约 66 张</td>
+                  <td>约 30 张</td>
+                  <td>约 22 张</td>
+                </tr>
+                <tr>
+                  <td>常用包 9000 积分</td>
+                  <td>约 150 张</td>
+                  <td>约 69 张</td>
+                  <td>约 50 张</td>
+                </tr>
+                <tr>
+                  <td>高级包 24000 积分</td>
+                  <td>约 400 张</td>
+                  <td>约 184 张</td>
+                  <td>约 133 张</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
         <div class="help-item">
@@ -2184,9 +2251,9 @@
         </div>
         <div class="help-item">
           <strong>积分消耗与返还</strong>
-          <div class="pricing-grid">
+          <div class="pricing-grid three">
             <div class="pricing-card">
-              <div class="pricing-name">GPT Image 2</div>
+              <div class="pricing-name">GPT Image 2 · 1K</div>
               <div class="pricing-points">60 <small>积分 / 次</small></div>
               <div class="refund-row">
                 <span class="refund-pill">违规返还</span>
@@ -2194,7 +2261,15 @@
               </div>
             </div>
             <div class="pricing-card">
-              <div class="pricing-name">Nano Banana Pro</div>
+              <div class="pricing-name">GPT Image 2 VIP · 2K/4K</div>
+              <div class="pricing-points">130 <small>积分 / 次</small></div>
+              <div class="refund-row">
+                <span class="refund-pill">违规返还</span>
+                <span class="refund-pill">失败返还</span>
+              </div>
+            </div>
+            <div class="pricing-card">
+              <div class="pricing-name">Nano Banana Pro · 1K/2K/4K</div>
               <div class="pricing-points">180 <small>积分 / 次</small></div>
               <div class="refund-row">
                 <span class="refund-pill">违规返还</span>
@@ -2202,7 +2277,7 @@
               </div>
             </div>
           </div>
-          <p>不同套餐折算单张成本不同，GPT Image 2 低至约 ￥0.10 / 张。价格和积分消耗以后可能随上游服务调整。</p>
+          <p>GPT Image 2 1K 低至约 ￥0.10 / 张，VIP 高清模式支持 2K / 4K。如果只是日常出图，推荐 GPT Image 2 1K；如果要高清封面、商品图或大图展示，推荐 GPT Image 2 VIP。</p>
         </div>
         <div class="help-item">
           <strong>图片会不会保存</strong>
@@ -2295,10 +2370,75 @@
       // 🔴 🔴 🔴 已配置为您的公开域名 🔴 🔴 🔴
       const PUBLIC_R2_DOMAIN = 'https://cdn.gordensun.com/bananaproimage';
 
-      // API 端点 (nano-banana 系列 与 gpt-image-2 使用不同接口)
-      const ENDPOINT = 'https://grsai.dakka.com.cn/v1/draw/nano-banana';
-      const GPT_IMAGE_ENDPOINT = 'https://grsai.dakka.com.cn/v1/draw/completions';
-      const RESULT_ENDPOINT = 'https://grsai.dakka.com.cn/v1/draw/result';
+      // Grsai 图片生成接口
+      const GENERATE_ENDPOINT = 'https://grsai.dakka.com.cn/v1/api/generate';
+      const RESULT_ENDPOINT = 'https://grsai.dakka.com.cn/v1/api/result';
+
+      const MODEL_CONFIG = {
+        'gpt-image-2': {
+          label: 'GPT Image 2',
+          allowedSizes: ['1K'],
+          defaultSize: '1K',
+          isGpt: true
+        },
+        'gpt-image-2-vip': {
+          label: 'GPT Image 2 VIP',
+          allowedSizes: ['2K', '4K'],
+          defaultSize: '2K',
+          isGpt: true
+        },
+        'nano-banana-pro': {
+          label: 'Nano Banana Pro',
+          allowedSizes: ['1K', '2K', '4K'],
+          defaultSize: '4K',
+          isGpt: false
+        }
+      };
+
+      const SIZE_LABELS = {
+        '1K': '1K 标准',
+        '2K': '2K 高清',
+        '4K': '4K 超清'
+      };
+
+      const GPT_ASPECT_RATIO_PIXELS = {
+        '1K': {
+          '1:1': '1024x1024',
+          '16:9': '1774x887',
+          '9:16': '887x1774',
+          '3:2': '1536x1024',
+          '2:3': '1024x1536',
+          '4:3': '1536x1024',
+          '3:4': '1024x1536',
+          '5:4': '1536x1024',
+          '4:5': '1024x1536',
+          '21:9': '2048x880'
+        },
+        '2K': {
+          '1:1': '2048x2048',
+          '16:9': '2048x1152',
+          '9:16': '1152x2048',
+          '3:2': '2048x1360',
+          '2:3': '1360x2048',
+          '4:3': '2048x1360',
+          '3:4': '1360x2048',
+          '5:4': '2048x1360',
+          '4:5': '1360x2048',
+          '21:9': '2048x880'
+        },
+        '4K': {
+          '1:1': '2880x2880',
+          '16:9': '3840x2160',
+          '9:16': '2160x3840',
+          '3:2': '3504x2336',
+          '2:3': '2336x3504',
+          '4:3': '3504x2336',
+          '3:4': '2336x3504',
+          '5:4': '3504x2336',
+          '4:5': '2336x3504',
+          '21:9': '3840x1648'
+        }
+      };
 
       // 独立缓存 Keys (grsai_pro)
       const STORE_KEY = 'grsai_pro:key';
@@ -2313,7 +2453,7 @@
           title: '3D 小红书资料卡',
           usage: '个人主页、社媒头像、博主视觉',
           tags: ['小红书', '3D', '粉彩'],
-          model: 'gpt-image-2',
+          model: 'gpt-image-2-vip',
           ratio: '1:1',
           size: '4K',
           subject: '一个女孩',
@@ -2326,7 +2466,7 @@
           title: '产品爆炸视图海报',
           usage: '数码产品、结构展示、科技海报',
           tags: ['爆炸图', '科技', '3D'],
-          model: 'gpt-image-2',
+          model: 'gpt-image-2-vip',
           ratio: '4:3',
           size: '4K',
           subject: 'VR 头显',
@@ -2339,7 +2479,7 @@
           title: 'Q版分身手账照',
           usage: '真人生活照、自拍、穿搭、旅行照',
           tags: ['手账', 'Q版', '贴纸'],
-          model: 'gpt-image-2',
+          model: 'gpt-image-2-vip',
           ratio: '4:3',
           size: '4K',
           subject: '用户上传的真人生活照片',
@@ -2352,7 +2492,7 @@
           title: '手绘包装提案板',
           usage: '产品包装、品牌提案、概念展示',
           tags: ['包装', '草图', '提案板'],
-          model: 'gpt-image-2',
+          model: 'gpt-image-2-vip',
           ratio: '3:4',
           size: '4K',
           subject: '一款植物气泡茶产品',
@@ -2365,7 +2505,7 @@
           title: '极简几何装置产品海报',
           usage: '电商主视觉、品牌 KV、产品展示',
           tags: ['极简', '几何', '产品'],
-          model: 'gpt-image-2',
+          model: 'gpt-image-2-vip',
           ratio: '3:4',
           size: '4K',
           subject: '一款柑橘气泡饮',
@@ -2378,7 +2518,7 @@
           title: '美食英雄说明书海报',
           usage: '餐饮新品、菜单主图、外卖推广',
           tags: ['美食', '说明书', '广告'],
-          model: 'gpt-image-2',
+          model: 'gpt-image-2-vip',
           ratio: '2:3',
           size: '4K',
           subject: '用户上传的食物图片',
@@ -2391,7 +2531,7 @@
           title: 'AI 美甲灵感方案',
           usage: '美甲提案、灵感转译、款式展示',
           tags: ['美甲', '提案板', '上手效果'],
-          model: 'gpt-image-2',
+          model: 'gpt-image-2-vip',
           ratio: '4:3',
           size: '4K',
           subject: '暗夜玫瑰主题',
@@ -2404,7 +2544,7 @@
           title: '看图学单词手账照',
           usage: '生活照片、英语学习、社媒笔记',
           tags: ['英语', '手账', '标注'],
-          model: 'gpt-image-2',
+          model: 'gpt-image-2-vip',
           ratio: '4:3',
           size: '4K',
           subject: '用户上传的生活照片',
@@ -2417,7 +2557,7 @@
           title: 'AI 五官美学升级报告',
           usage: '正面形象照、面部分析、医美咨询感报告',
           tags: ['报告', 'Before After', '标注'],
-          model: 'gpt-image-2',
+          model: 'gpt-image-2-vip',
           ratio: '4:3',
           size: '4K',
           subject: '用户上传的正面形象照片',
@@ -2430,7 +2570,7 @@
           title: 'ENERGY 街头服饰广告',
           usage: '潮流服饰、科技时尚、广告大片',
           tags: ['街头', '广告', '游戏手柄'],
-          model: 'gpt-image-2',
+          model: 'gpt-image-2-vip',
           ratio: '4:3',
           size: '4K',
           subject: '一个自信运动感女孩',
@@ -2443,7 +2583,7 @@
           title: '电影感学习氛围照',
           usage: '学习打卡、校园氛围、Pinterest 风格图',
           tags: ['学习', '秋日', '手账'],
-          model: 'gpt-image-2',
+          model: 'gpt-image-2-vip',
           ratio: '4:3',
           size: '4K',
           subject: '一个长发亚洲女孩',
@@ -2456,7 +2596,7 @@
           title: '高能动漫转绘',
           usage: '人物转绘、表情夸张、搞笑动感图',
           tags: ['动漫', '夸张', '动感'],
-          model: 'gpt-image-2',
+          model: 'gpt-image-2-vip',
           ratio: '4:3',
           size: '4K',
           subject: '用户上传的主体',
@@ -2543,10 +2683,8 @@
       // ====== 初始化：加载缓存 ======
       ui.key.value = localStorage.getItem(STORE_KEY) || '';
       if (localStorage.getItem(STORE_RATIO)) ui.ratio.value = localStorage.getItem(STORE_RATIO);
-      if (localStorage.getItem(STORE_MODEL)) ui.model.value = localStorage.getItem(STORE_MODEL);
-
-      // 分辨率初始化：优先缓存，无缓存则默认 4K
-      ui.size.value = localStorage.getItem(STORE_SIZE) || '4K';
+      const savedModel = localStorage.getItem(STORE_MODEL);
+      ui.model.value = MODEL_CONFIG[savedModel] ? savedModel : 'gpt-image-2';
       // 监听保存
       ui.saveKey.onclick = () => {
         const key = ui.key.value.trim();
@@ -2607,7 +2745,8 @@
       ui.size.onchange = () => localStorage.setItem(STORE_SIZE, ui.size.value);
       ui.model.onchange = () => {
         localStorage.setItem(STORE_MODEL, ui.model.value);
-        updateSizeAvailability();
+        const config = MODEL_CONFIG[ui.model.value] || MODEL_CONFIG['gpt-image-2'];
+        updateSizeAvailability(config.defaultSize);
       };
 
       ui.cancelTask.onclick = () => {
@@ -2621,18 +2760,16 @@
         setLoading(false);
       };
 
-      function updateSizeAvailability() {
-        const isGptImage = ui.model.value === 'gpt-image-2';
-        if (isGptImage) {
-          // GPT Image 2 模型其实不需要强制锁定为1K，我们可以让用户自由选择，或者保持启用状态
-          // ui.size.value = '1K';
-        } else {
-          ui.size.value = localStorage.getItem(STORE_SIZE) || '4K';
-        }
-        // 解除对 sizeSelect 的禁用
-        ui.size.disabled = false;
-        ui.size.style.opacity = '';
-        ui.size.style.cursor = '';
+      function updateSizeAvailability(preferredSize) {
+        const config = MODEL_CONFIG[ui.model.value] || MODEL_CONFIG['gpt-image-2'];
+        const desiredSize = preferredSize || localStorage.getItem(STORE_SIZE) || config.defaultSize;
+        const nextSize = config.allowedSizes.includes(desiredSize) ? desiredSize : config.defaultSize;
+        ui.size.innerHTML = config.allowedSizes.map(size => `<option value="${size}">${SIZE_LABELS[size]}</option>`).join('');
+        ui.size.value = nextSize;
+        ui.size.disabled = config.allowedSizes.length === 1;
+        ui.size.style.opacity = ui.size.disabled ? '0.72' : '';
+        ui.size.style.cursor = ui.size.disabled ? 'not-allowed' : '';
+        localStorage.setItem(STORE_SIZE, ui.size.value);
       }
       updateSizeAvailability();
       renderStyleLibrary();
@@ -2698,9 +2835,43 @@
       }
 
       function getModelLabel(value) {
-        if (value === 'gpt-image-2') return 'GPT Image 2';
-        if (value === 'nano-banana-pro') return 'Nano Banana Pro';
+        if (MODEL_CONFIG[value]) return MODEL_CONFIG[value].label;
         return value || '默认';
+      }
+
+      function getGptAspectRatio(size, ratio) {
+        const normalizedRatio = ratio === 'auto' ? '1:1' : ratio;
+        return (GPT_ASPECT_RATIO_PIXELS[size] && GPT_ASPECT_RATIO_PIXELS[size][normalizedRatio]) || GPT_ASPECT_RATIO_PIXELS[size]['1:1'];
+      }
+
+      function extractResultUrls(data) {
+        const target = data && data.data ? data.data : data;
+        if (!target) return [];
+        if (Array.isArray(target.results)) {
+          return target.results.map(item => item && item.url).filter(Boolean);
+        }
+        if (Array.isArray(target.data)) {
+          return target.data.map(item => {
+            if (typeof item === 'string' && item.startsWith('http')) return item;
+            if (item && item.url) return item.url;
+            if (item && item.b64_json) return `data:image/png;base64,${item.b64_json}`;
+            return null;
+          }).filter(Boolean);
+        }
+        const directUrl = target.imageUrl || target.image_url || target.url || target.result;
+        if (typeof directUrl === 'string' && directUrl.startsWith('http')) return [directUrl];
+        if (typeof target === 'string' && target.startsWith('http')) return [target];
+        return [];
+      }
+
+      function getResultStatus(data) {
+        const target = data && data.data ? data.data : data;
+        return target && (target.status || data.status);
+      }
+
+      function getResultError(data) {
+        const target = data && data.data ? data.data : data;
+        return (target && (target.error || target.failure_reason || target.failReason || target.msg)) || data.error || data.msg || '未知错误';
       }
 
       function buildStylePrompt(preset) {
@@ -2768,11 +2939,10 @@
         ui.prompt.value = buildStylePrompt(currentStylePreset);
         ui.model.value = currentStylePreset.model;
         ui.ratio.value = currentStylePreset.ratio;
-        ui.size.value = currentStylePreset.size;
+        updateSizeAvailability(currentStylePreset.size);
         localStorage.setItem(STORE_MODEL, currentStylePreset.model);
         localStorage.setItem(STORE_RATIO, currentStylePreset.ratio);
-        localStorage.setItem(STORE_SIZE, currentStylePreset.size);
-        updateSizeAvailability();
+        localStorage.setItem(STORE_SIZE, ui.size.value);
         closeStyleDetail();
         msg(`已套用风格：${currentStylePreset.title}`);
         ui.prompt.focus();
@@ -2980,13 +3150,29 @@
         }
       };
 
-      // ====== Helper Methods (Removed Poll) ======
+      function wait(ms, signal) {
+        return new Promise((resolve, reject) => {
+          if (signal && signal.aborted) {
+            reject(new DOMException('Aborted', 'AbortError'));
+            return;
+          }
+          const timer = setTimeout(resolve, ms);
+          currentPollTimer = timer;
+          if (signal) {
+            signal.addEventListener('abort', () => {
+              clearTimeout(timer);
+              reject(new DOMException('Aborted', 'AbortError'));
+            }, { once: true });
+          }
+        });
+      }
 
-      // ====== 核心：生成请求 (同步模式) ======
+      // ====== 核心：生成请求（异步轮询） ======
       ui.go.onclick = async () => {
         const prompt = ui.prompt.value.trim();
         const key = ui.key.value.trim();
-        const model = ui.model.value || 'gemini-3.1-flash-image-preview';
+        const model = MODEL_CONFIG[ui.model.value] ? ui.model.value : 'gpt-image-2';
+        const modelConfig = MODEL_CONFIG[model];
 
         if (!prompt) return msg('请输入一些描述...', true);
         if (!key) return msg('请填写 Key', true);
@@ -3001,68 +3187,29 @@
         addHistoryItem(taskId, 'pending', [], prompt);
 
         try {
-          let ratio = ui.ratio.value;
-          let imgSize = "1024x1024";
-          if (ratio === '16:9' || ratio === '3:2' || ratio === '4:3') imgSize = '1536x1024';
-          else if (ratio === '9:16' || ratio === '2:3' || ratio === '3:4') imgSize = '1024x1536';
-          else if (ratio === '1:1') imgSize = '1024x1024';
-          else imgSize = '1024x1024'; // fallback
+          const selectedSize = ui.size.value || modelConfig.defaultSize;
+          const payload = {
+            model,
+            prompt,
+            images: refImages.slice(),
+            aspectRatio: modelConfig.isGpt ? getGptAspectRatio(selectedSize, ui.ratio.value) : (ui.ratio.value || 'auto'),
+            replyType: 'json'
+          };
+          if (!modelConfig.isGpt) {
+            payload.imageSize = selectedSize;
+          }
 
-          let endpoint = 'https://grsai.dakka.com.cn/v1/draw/completions';
-          let payload = {};
-          let options = {
+          const options = {
             method: 'POST',
             signal: currentAbortController.signal,
             headers: {
               'Authorization': 'Bearer ' + key,
               'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify(payload)
           };
 
-          if (model === 'nano-banana-pro') {
-            endpoint = 'https://grsai.dakka.com.cn/v1/draw/nano-banana';
-            
-            // 对 nano-banana-pro 拼接参数
-            payload = {
-              model: model,
-              prompt: prompt,
-              aspectRatio: ui.ratio.value === '1:1' ? '1:1' : (ui.ratio.value || 'auto'), 
-              imageSize: ui.size.value || '1K',
-              webHook: "-1",
-              shutProgress: false
-            };
-
-            // 如果有参考图，需要放入 urls 数组 (支持 Base64 或 URL)
-            if (rawFiles.length > 0) {
-              const base64Url = await new Promise((resolve) => {
-                const reader = new FileReader();
-                reader.onload = (e) => resolve(e.target.result);
-                reader.readAsDataURL(rawFiles[0]);
-              });
-              payload.urls = [base64Url];
-            }
-          } else {
-            payload = {
-              model: model,
-              prompt: prompt,
-              aspectRatio: ui.ratio.value, // 1:1, 16:9, 3:2 etc.
-              size: ui.size.value, // 1K, 2K, 4K
-              webHook: "-1" // 强制接口立即返回任务id用于轮询
-            };
-
-            if (rawFiles.length > 0) {
-              const base64Url = await new Promise((resolve) => {
-                const reader = new FileReader();
-                reader.onload = (e) => resolve(e.target.result);
-                reader.readAsDataURL(rawFiles[0]);
-              });
-              payload.urls = [base64Url];
-            }
-          }
-
-          options.body = JSON.stringify(payload);
-
-          const res = await fetch(endpoint, options);
+          const res = await fetch(GENERATE_ENDPOINT, options);
           if (!res.ok) {
             let errMessage = `HTTP ${res.status}`;
             try {
@@ -3080,268 +3227,87 @@
             throw new Error(friendlyError(errMessage, res.status));
           }
 
-          let urls = [];
-          let rawResponseDebug = [];
-          
-          const contentType = res.headers.get('content-type') || '';
-          
-          // 如果响应是普通的 JSON，直接抛出异常（针对 API 返回 200 但 code < 0 的情况）
-          if (contentType.includes('application/json')) {
-            const data = await res.clone().json();
-            if (data.code && data.code < 0) {
-                console.error("API 业务逻辑错误详情:", data);
-                throw new Error(friendlyError(data.msg || data.error || JSON.stringify(data)));
-            }
-          }
-          if (contentType.includes('text/event-stream') || contentType.includes('stream') || contentType.includes('application/x-ndjson')) {
-            // 处理流式响应
-            const reader = res.body.getReader();
-            const decoder = new TextDecoder('utf-8');
-            let buffer = '';
-            
-            while (true) {
-              const { done, value } = await reader.read();
-              if (done) break;
-              
-              buffer += decoder.decode(value, { stream: true });
-              const lines = buffer.split('\n');
-              buffer = lines.pop(); // 保留最后一个不完整的行
-              
-              for (const line of lines) {
-                const trimmed = line.trim();
-                if (!trimmed) continue;
-                
-                let dataStr = trimmed;
-                if (dataStr.startsWith('data:')) {
-                  dataStr = dataStr.slice(5).trim();
-                }
-                if (dataStr === '[DONE]') continue;
-                
-                try {
-                  const dataObj = JSON.parse(dataStr);
-                  rawResponseDebug.push(dataObj);
-                  
-                  // 判断是否为错误返回
-                  if (dataObj.code && dataObj.code < 0) {
-                     throw new Error(friendlyError(dataObj.msg || 'API Error'));
-                  }
-
-                  // 尝试解析进度和结果
-                  if (dataObj.status === 'IN_PROGRESS' || dataObj.progress) {
-                    msg(`正在绘制... 进度: ${dataObj.progress || '处理中'}`);
-                  }
-                  
-                  // 寻找图片URL (增强兼容性)
-                  let imgUrl = dataObj.imageUrl || dataObj.url;
-                  if (!imgUrl && dataObj.data) {
-                    if (typeof dataObj.data === 'string' && dataObj.data.startsWith('http')) {
-                      imgUrl = dataObj.data;
-                    } else if (dataObj.data.url) {
-                      imgUrl = dataObj.data.url;
-                    } else if (Array.isArray(dataObj.data) && dataObj.data[0]) {
-                      imgUrl = dataObj.data[0].url || (dataObj.data[0].b64_json ? `data:image/png;base64,${dataObj.data[0].b64_json}` : null);
-                    }
-                  }
-                  if (!imgUrl && typeof dataObj.result === 'string' && dataObj.result.startsWith('http')) imgUrl = dataObj.result;
-                  
-                  if (imgUrl) {
-                    if (!urls.includes(imgUrl)) urls.push(imgUrl);
-                  }
-                } catch (e) {
-                  if (e.message && e.message.includes('API Error')) {
-                    throw e;
-                  }
-                  // 对于解析失败的数据忽略即可，继续读取
-                }
-              }
-            }
-            // 处理最后剩余的buffer
-            if (buffer.trim()) {
-               let dataStr = buffer.trim();
-               if (dataStr.startsWith('data:')) dataStr = dataStr.slice(5).trim();
-               if (dataStr !== '[DONE]') {
-                 try {
-                    const dataObj = JSON.parse(dataStr);
-                    rawResponseDebug.push(dataObj);
-                    if (dataObj.code && dataObj.code < 0) throw new Error(friendlyError(dataObj.msg || 'API Error'));
-                    
-                    let imgUrl = dataObj.imageUrl || dataObj.url;
-                    if (!imgUrl && dataObj.data) {
-                      if (typeof dataObj.data === 'string' && dataObj.data.startsWith('http')) imgUrl = dataObj.data;
-                      else if (dataObj.data.url) imgUrl = dataObj.data.url;
-                      else if (Array.isArray(dataObj.data) && dataObj.data[0]) imgUrl = dataObj.data[0].url || (dataObj.data[0].b64_json ? `data:image/png;base64,${dataObj.data[0].b64_json}` : null);
-                    }
-                    if (!imgUrl && typeof dataObj.result === 'string' && dataObj.result.startsWith('http')) imgUrl = dataObj.result;
-
-                    if (imgUrl) {
-                      if (!urls.includes(imgUrl)) urls.push(imgUrl);
-                    }
-                 } catch (e) {
-                    if (e.message && e.message.includes('API Error')) throw e;
-                 }
-               }
-            }
-          } else {
-            // 处理同步 JSON 响应
-            const data = await res.json();
-            rawResponseDebug.push(data);
-            
-            // 尝试从多种常见结构中提取图片
-            if (data.imageUrl) urls.push(data.imageUrl);
-            else if (data.url) urls.push(data.url);
-            else if (data.result && typeof data.result === 'string' && data.result.startsWith('http')) urls.push(data.result);
-            else if (data.data) {
-              if (typeof data.data === 'string' && data.data.startsWith('http')) {
-                urls.push(data.data);
-              } else if (Array.isArray(data.data)) {
-                urls = data.data.map(item => {
-                  if (item.url) return item.url;
-                  if (item.b64_json) return `data:image/png;base64,${item.b64_json}`;
-                  return null;
-                }).filter(u => u);
-              }
-            } else if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
-              const content = data.choices[0].message.content;
-              const mdImageRegex = /!\[.*?\]\((https?:\/\/[^\s\)]+)\)/g;
-              let match;
-              let foundUrl = false;
-              while ((match = mdImageRegex.exec(content)) !== null) {
-                urls.push(match[1]);
-                foundUrl = true;
-              }
-              if (!foundUrl) {
-                // 如果没有匹配到 markdown 图片，尝试直接提取纯 URL
-                const urlRegex = /(https?:\/\/[^\s\)]+)/g;
-                while ((match = urlRegex.exec(content)) !== null) {
-                  urls.push(match[1]);
-                  foundUrl = true;
-                }
-              }
-            }
+          const submitData = await res.json();
+          if (submitData.code && submitData.code < 0) {
+            throw new Error(friendlyError(submitData.msg || submitData.error || JSON.stringify(submitData)));
           }
 
-          if (urls.length > 0) {
+          const immediateUrls = extractResultUrls(submitData);
+          if (immediateUrls.length > 0) {
             msg('创作完成');
-            addHistoryItem(taskId, 'completed', urls, prompt);
-            addGalleryGroup(urls, prompt);
-          } else {
-            const lastData = rawResponseDebug[rawResponseDebug.length - 1] || {};
-            // 判断是否返回了包含id的数据结构（需要轮询获取结果）
-            const pollingId = lastData.id || lastData.task_id || (lastData.data && lastData.data.id) || (lastData.data && typeof lastData.data === 'string' && !lastData.data.startsWith('http') ? lastData.data : null);
-            
-            if (pollingId) {
-              msg(`任务已提交，正在等待绘制完成...`, false);
-              
-              // 启动轮询机制
-              let pollCount = 0;
-              const maxPolls = 150; // 最多轮询150次 (约5分钟)
-              const pollInterval = 2000; // 每2秒轮询一次
-              
-              currentPollTimer = setInterval(async () => {
-                pollCount++;
-                try {
-                  const pollRes = await fetch('https://grsai.dakka.com.cn/v1/draw/result', {
-                    method: 'POST',
-                    signal: currentAbortController.signal,
-                    headers: {
-                      'Authorization': 'Bearer ' + key,
-                      'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ id: pollingId })
-                  });
-                  
-                  if (!pollRes.ok) throw new Error(friendlyError(`HTTP ${pollRes.status}`, pollRes.status));
-                  
-                  const pollData = await pollRes.json();
-                  if (pollData.code && pollData.code < 0) {
-                     clearInterval(currentPollTimer);
-                     currentPollTimer = null;
-                     throw new Error(friendlyError(pollData.msg || 'API Error'));
-                  }
-                  
-                  // 根据文档格式，实际数据可能包裹在 data 中
-                  const targetData = pollData.data || pollData;
-                  
-                  // 提取进度和状态
-                  const progress = targetData.progress || pollData.progress;
-                  const status = targetData.status || pollData.status;
-                  
-                  if (progress !== undefined && status !== 'SUCCESS' && status !== 'succeeded') {
-                    msg(`正在绘制... 进度: ${progress}%`);
-                  }
-                  
-                  // 寻找最终图片URL (严格按照文档结构，并兼顾其他可能格式)
-                  let imgUrl = null;
-                  if (targetData.results && targetData.results[0] && targetData.results[0].url) {
-                    imgUrl = targetData.results[0].url;
-                  } else {
-                    imgUrl = targetData.imageUrl || targetData.url || targetData.image_url;
-                    if (!imgUrl && typeof targetData === 'string' && targetData.startsWith('http')) {
-                      imgUrl = targetData;
-                    } else if (!imgUrl && Array.isArray(targetData) && targetData[0]) {
-                      imgUrl = targetData[0].url || targetData[0].imageUrl || (targetData[0].b64_json ? `data:image/png;base64,${targetData[0].b64_json}` : null);
-                    }
-                    if (!imgUrl && typeof pollData.result === 'string' && pollData.result.startsWith('http')) {
-                      imgUrl = pollData.result;
-                    }
-                  }
-                  
-                  // 检查任务是否失败
-                  if (status === 'FAILED' || status === 'FAILURE' || status === 'failed') {
-                    clearInterval(currentPollTimer);
-                    currentPollTimer = null;
-                    addHistoryItem(taskId, 'failed', [], prompt);
-                    msg(friendlyError(targetData.failure_reason || targetData.error || targetData.failReason || targetData.msg || pollData.msg || '未知错误'), true);
-                    setLoading(false);
-                    return;
-                  }
+            addHistoryItem(taskId, 'completed', immediateUrls, prompt);
+            addGalleryGroup(immediateUrls, prompt);
+            setLoading(false);
+            return;
+          }
 
-                  if (status === 'SUCCESS' || status === 'succeeded' || imgUrl) {
-                    if (imgUrl) {
-                      clearInterval(currentPollTimer);
-                      currentPollTimer = null;
-                      msg('创作完成');
-                      addHistoryItem(taskId, 'completed', [imgUrl], prompt);
-                      addGalleryGroup([imgUrl], prompt);
-                      setLoading(false);
-                    } else {
-                      // 状态成功但找不到图片，打印出来方便调试
-                      msg(`任务已成功，但解析图片失败: ${JSON.stringify(targetData).substring(0, 150)}`, true);
-                      console.log("成功但无图片:", pollData);
-                    }
-                  } else if (pollCount >= maxPolls) {
-                    clearInterval(currentPollTimer);
-                    currentPollTimer = null;
-                    addHistoryItem(taskId, 'failed', [], prompt);
-                    msg('等待超时，暂时没有拿到图片，请稍后查看历史或重新生成。', true);
-                    setLoading(false);
-                  }
-                } catch (err) {
-                  if (currentPollTimer) clearInterval(currentPollTimer);
-                  currentPollTimer = null;
-                  if (err.name === 'AbortError') {
-                    addHistoryItem(taskId, 'canceled', [], prompt);
-                    msg('已取消本次生成');
-                  } else {
-                    console.error('轮询错误:', err);
-                    addHistoryItem(taskId, 'failed', [], prompt);
-                    msg(friendlyError(err.message || '未知错误'), true);
-                  }
-                  setLoading(false);
-                }
-              }, pollInterval);
-              
-              // 既然进入轮询，我们在当前作用域中不再立刻设置为false，让轮询函数内部控制
-              return; // 提前退出，避免执行外层的 finally { setLoading(false) }
-            } else {
+          const pollingId = submitData.id || submitData.task_id || (submitData.data && submitData.data.id);
+          if (!pollingId) {
+            addHistoryItem(taskId, 'failed', [], prompt);
+            console.log("API 未返回任务 ID:", submitData);
+            msg('未返回任务 ID，请稍后重试。', true);
+            setLoading(false);
+            return;
+          }
+
+          msg('任务已提交，正在等待绘制完成...', false);
+
+          for (let pollCount = 0; pollCount < 150; pollCount++) {
+            await wait(2000, currentAbortController.signal);
+            const pollRes = await fetch(`${RESULT_ENDPOINT}?id=${encodeURIComponent(pollingId)}`, {
+              method: 'GET',
+              signal: currentAbortController.signal,
+              headers: {
+                'Authorization': 'Bearer ' + key
+              }
+            });
+
+            if (!pollRes.ok) throw new Error(friendlyError(`HTTP ${pollRes.status}`, pollRes.status));
+            const pollData = await pollRes.json();
+            if (pollData.code && pollData.code < 0) {
+              throw new Error(friendlyError(pollData.msg || pollData.error || 'API Error'));
+            }
+
+            const status = String(getResultStatus(pollData) || '').toLowerCase();
+            const urls = extractResultUrls(pollData);
+            const targetData = pollData.data || pollData;
+            const progress = targetData.progress !== undefined ? targetData.progress : pollData.progress;
+
+            if (progress !== undefined && status !== 'succeeded') {
+              msg(`正在绘制... 进度: ${progress}%`);
+            }
+
+            if (status === 'violation') {
+              addHistoryItem(taskId, 'rejected', [], prompt);
+              msg('图片审核未通过，请调整描述后再试。', true);
+              setLoading(false);
+              return;
+            }
+
+            if (status === 'failed') {
               addHistoryItem(taskId, 'failed', [], prompt);
-              const debugStr = rawResponseDebug.length > 0 ? JSON.stringify(lastData) : '空';
-              console.log("API 未返回图片，完整响应:", rawResponseDebug);
-              msg('未返回有效图片: ' + debugStr.substring(0, 100) + '...', true);
+              msg(friendlyError(getResultError(pollData)), true);
+              setLoading(false);
+              return;
+            }
+
+            if (status === 'succeeded' || urls.length > 0) {
+              if (!urls.length) {
+                addHistoryItem(taskId, 'failed', [], prompt);
+                msg('任务已成功，但没有返回图片链接。', true);
+                setLoading(false);
+                return;
+              }
+              msg('创作完成');
+              addHistoryItem(taskId, 'completed', urls, prompt);
+              addGalleryGroup(urls, prompt);
+              setLoading(false);
+              return;
             }
           }
 
-          // 如果没有被轮询拦截，则直接在这里关闭loading
+          addHistoryItem(taskId, 'timeout', [], prompt);
+          msg('等待超时，暂时没有拿到图片，请稍后重试。', true);
           setLoading(false);
         } catch (err) {
           if (err.name === 'AbortError') {
