@@ -1,5 +1,11 @@
 # Pory.AI绘图 30 天开卖执行手册
 
+配套文件：
+
+- `docs/launch-content-pack.md`：公众号文章草稿、小红书笔记草稿、评论回复和微信成交话术。
+- `docs/launch-calendar.csv`：30 天发布排期。
+- `docs/launch-tracker.csv`：每日发布、咨询、成交和售后记录表。
+
 ## 目标
 
 30 天拿到 30 个付费用户，验证真实需求、生成成功率和复购意愿。
