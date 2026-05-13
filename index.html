@@ -722,6 +722,9 @@
       background: #f5f5f7;
       aspect-ratio: 4 / 5;
       border: 1px solid rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .style-sample:first-child {
@@ -736,14 +739,16 @@
     .style-samples.single .style-sample:first-child {
       grid-column: auto;
       grid-row: auto;
-      aspect-ratio: 4 / 3;
+      aspect-ratio: auto;
+      height: min(58vh, 560px);
+      min-height: 420px;
     }
 
     .style-sample img {
       display: block;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
     }
 
     .style-detail {
@@ -767,6 +772,10 @@
       margin: 0;
       white-space: pre-wrap;
       word-break: break-word;
+      height: clamp(220px, 32vh, 300px);
+      overflow: auto;
+      overscroll-behavior: contain;
+      box-sizing: border-box;
       border: 1px solid rgba(0, 0, 0, 0.08);
       background: #f5f5f7;
       border-radius: 16px;
@@ -775,6 +784,12 @@
       font-size: 13px;
       line-height: 1.55;
       font-family: inherit;
+    }
+
+    .style-prompt-box.is-locked {
+      border-color: rgba(0, 0, 0, 0.12);
+      background: #f2f2f4;
+      color: #6e6e73;
     }
 
     .style-recommend {
@@ -2030,6 +2045,12 @@
         grid-row: auto;
       }
 
+      .style-samples.single .style-sample:first-child {
+        aspect-ratio: 1 / 1;
+        height: auto;
+        min-height: 0;
+      }
+
       .style-actions {
         display: grid;
         grid-template-columns: 1fr;
@@ -2139,9 +2160,9 @@
           <div>
             <p class="style-library-kicker">Style Library</p>
             <h2 class="style-library-title">风格示例库</h2>
-            <p class="style-library-note">挑选喜欢的视觉方向，查看示例和 Prompt 模板，再一键套用到当前生成设置。</p>
+            <p class="style-library-note">挑选喜欢的视觉方向，示例图可直接浏览；保存 API Key 后可查看 Prompt 模板并一键套用。</p>
           </div>
-          <span class="style-count" id="styleCount">12 个精选风格</span>
+          <span class="style-count" id="styleCount">15 个精选风格</span>
         </div>
         <div class="style-grid" id="styleGrid"></div>
       </section>
@@ -2336,7 +2357,7 @@
             </div>
           </div>
           <div class="style-detail-section">
-            <div class="style-detail-label">适用说明</div>
+            <div class="style-detail-label">使用说明</div>
             <p class="style-panel-subtitle" id="styleModalNote"></p>
           </div>
           <div class="style-actions">
@@ -2603,6 +2624,313 @@
           template: 'Create a trending anime art style image from the uploaded subject. Use confident line-work with slight variation and minimal cel shading using flat shadow shapes. Use bright, saturated colors and clean graphic lighting. The style is defined by exaggerated, cartoonish character proportions featuring highly expressive, simplistic facial features that allow for immense emotional range, with highly varied stretched anatomy. Transform the environment into a slightly warped space with playful perspective distortion and simplified objects. Composition and tone should be energetic, lively, and comedic in a fully stylized, non-realistic world.',
           note: '适合上传人物、宠物或物体后做高能动漫风转绘。',
           images: ['data/style-examples/style-12-trending-anime-transform.png']
+        },
+        {
+          id: 'product-grid-json-storyboard',
+          title: '产品九宫格 JSON 分镜',
+          usage: '产品多图、品牌视觉、小红书种草图',
+          tags: ['产品', '九宫格', 'JSON'],
+          model: 'gpt-image-2-vip',
+          ratio: '3:4',
+          size: '4K',
+          subject: '品牌名、产品类型、主色调、辅助元素',
+          template: `{
+  "task": "Generate one complete 3x3 vertical product visual poster based on the uploaded product image.",
+  "user_notes": "{主体}",
+  "output": {
+    "format": "single 3x3 grid image",
+    "aspect_ratio": "3:4 vertical",
+    "resolution": "4K",
+    "grid_lines": "thin white dividers",
+    "overall_quality": "premium editorial brand campaign"
+  },
+  "product_reference": {
+    "instruction": "Use the uploaded product image as the only source for the product shape, material, color, logo, label, scale and packaging structure.",
+    "keep_accurate": true,
+    "do_not_change": [
+      "product type",
+      "bottle shape or product structure",
+      "cap or accessory shape",
+      "logo placement",
+      "main color",
+      "material texture",
+      "brand identity"
+    ]
+  },
+  "brand": {
+    "name": "{品牌名}",
+    "product": "{产品类型}",
+    "keywords": [
+      "{品牌气质1}",
+      "{品牌气质2}",
+      "{品牌气质3}"
+    ]
+  },
+  "visual_style": {
+    "style": "premium natural product photography, cinematic editorial, calm luxury, minimal composition",
+    "lighting": "soft natural window light, gentle highlights, soft shadows, shallow depth of field",
+    "palette": "{主色调} with {辅助色调}",
+    "materials": [
+      "glass",
+      "liquid",
+      "skin",
+      "flowers",
+      "green leaves",
+      "water drops",
+      "linen fabric",
+      "stone surface",
+      "wood surface",
+      "soft smoke or mist"
+    ],
+    "mood": "clean, refined, sensory, natural, high-end"
+  },
+  "text_rules": {
+    "add_numbers": true,
+    "number_style": "01 to 09, small elegant serif text in the top-left corner of each grid",
+    "add_titles": true,
+    "title_style": "short bilingual or English editorial titles, subtle and elegant",
+    "avoid": [
+      "messy text",
+      "wrong brand name",
+      "watermark",
+      "cheap commercial poster typography",
+      "oversized text"
+    ]
+  },
+  "grid": [
+    {
+      "position": "top-left",
+      "number": "01",
+      "title": "The Application",
+      "type": "human_use_scene",
+      "shot": "close-up",
+      "prompt": "A close-up of a person's hand or body detail using the product, soft skin texture, elegant gesture, natural window light, shallow depth of field, intimate and refined brand ritual.",
+      "lighting": "soft warm natural light",
+      "palette": "{主色调} with skin tone",
+      "role": "emotional entry"
+    },
+    {
+      "position": "top-center",
+      "number": "02",
+      "title": "The Texture",
+      "type": "material_macro",
+      "shot": "extreme macro",
+      "prompt": "Extreme macro view of the product material, liquid, glass, metal, surface texture or water droplets, highly tactile, luminous highlights, abstract premium texture.",
+      "lighting": "directional soft highlight",
+      "palette": "{主色调} close-up tones",
+      "role": "texture and quality proof"
+    },
+    {
+      "position": "top-right",
+      "number": "03",
+      "title": "The Origin",
+      "type": "ingredient_flat_lay",
+      "shot": "top-down flat lay",
+      "prompt": "A clean flat lay of natural ingredients and inspiration elements related to the product, such as flowers, leaves, fruit, herbs, stone, linen or wood, arranged with elegant negative space.",
+      "lighting": "soft diffused daylight",
+      "palette": "{主色调} with natural accents",
+      "role": "ingredient and concept story"
+    },
+    {
+      "position": "middle-left",
+      "number": "04",
+      "title": "The Collection",
+      "type": "product_lineup",
+      "shot": "front editorial product shot",
+      "prompt": "Several versions or repeated angles of the uploaded product arranged as a refined product collection, clean composition, premium catalog feeling, soft reflections.",
+      "lighting": "gentle side light",
+      "palette": "cohesive brand palette",
+      "role": "product family display"
+    },
+    {
+      "position": "middle-center",
+      "number": "05",
+      "title": "Hero Shot",
+      "type": "main_product_visual",
+      "shot": "centered hero shot",
+      "prompt": "The uploaded product as the central hero object, placed in a clean refined scene with subtle flowers or natural elements, soft glow, elegant reflection, premium brand campaign composition.",
+      "lighting": "cinematic soft frontal light",
+      "palette": "{主色调} with luminous highlights",
+      "role": "main visual anchor"
+    },
+    {
+      "position": "middle-right",
+      "number": "06",
+      "title": "Living Space",
+      "type": "lifestyle_scene",
+      "shot": "environmental product shot",
+      "prompt": "The product placed in a calm lifestyle space such as a window ledge, bathroom, vanity table, wooden tray or stone surface, with soft curtains, natural shadows and quiet luxury atmosphere.",
+      "lighting": "late afternoon window light",
+      "palette": "natural warm neutral tones",
+      "role": "daily lifestyle context"
+    },
+    {
+      "position": "bottom-left",
+      "number": "07",
+      "title": "The Label",
+      "type": "brand_detail",
+      "shot": "macro logo detail",
+      "prompt": "A close-up of the product logo, label, engraving or key packaging detail, clean negative space, premium surface texture, brand name sharp and elegant.",
+      "lighting": "soft grazing light",
+      "palette": "brand color close-up",
+      "role": "brand recognition"
+    },
+    {
+      "position": "bottom-center",
+      "number": "08",
+      "title": "The Moment",
+      "type": "functional_moment",
+      "shot": "macro action shot",
+      "prompt": "A poetic functional moment related to the product, such as liquid drop, spray mist, smoke rising, light passing through glass, oil flowing, or reflective highlight, elegant and minimal.",
+      "lighting": "backlight or soft highlight",
+      "palette": "{主色调} with transparent highlights",
+      "role": "sensory function"
+    },
+    {
+      "position": "bottom-right",
+      "number": "09",
+      "title": "The Aura",
+      "type": "emotional_closure",
+      "shot": "atmospheric scene",
+      "prompt": "A more abstract atmospheric closing image with the product partially visible, surrounded by mist, smoke, plant shadows, soft blur or cinematic backlight, mysterious and high-end.",
+      "lighting": "low-key cinematic light",
+      "palette": "deepened version of brand palette",
+      "role": "emotional ending"
+    }
+  ],
+  "negative_prompt": [
+    "do not create separate images",
+    "do not distort the product",
+    "do not invent a different package",
+    "do not use cheap e-commerce style",
+    "do not use oversaturated colors",
+    "do not add unrelated objects",
+    "do not add watermark",
+    "do not create unreadable large typography",
+    "do not make the grid messy"
+  ]
+}`,
+          note: '适合上传产品图后，一次生成完整 3×3 品牌视觉组图。可在 user_notes 或占位字段里补品牌名、产品类型、主色调和辅助元素。',
+          images: ['data/style-examples/style-13-product-grid-json.png']
+        },
+        {
+          id: 'decorative-folk-flat-illustration',
+          title: '民俗扁平插画涂鸦',
+          usage: '照片转绘、儿童感插画、装饰画',
+          tags: ['插画', '民俗', '涂鸦'],
+          model: 'gpt-image-2-vip',
+          ratio: '3:4',
+          size: '4K',
+          subject: '用户上传的图片',
+          template: `Please transform the entire image into a single Decorative Folk Flat Illustration with Doodle elements. Use a bold and playful color palette, completely different from the original image.
+Simplify all details into clean, flat shapes with a handmade, slightly imperfect feel, as if drawn on a sheet of white paper. The overall style should look cute, childlike, and whimsical.`,
+          note: '需要先上传图片，适合把照片或普通画面转成可爱、明亮、手绘感的装饰插画。',
+          images: ['data/style-examples/style-14-decorative-folk-flat-illustration.png']
+        },
+        {
+          id: 'window-forest-french-portrait',
+          title: '春夏窗边森系法式写真',
+          usage: '个人写真、头像、氛围照',
+          tags: ['写真', '窗边', '胶片感'],
+          model: 'gpt-image-2-vip',
+          ratio: '3:4',
+          size: '4K',
+          subject: '用户上传的 1-3 张清晰个人照片',
+          template: `请基于用户上传的 1-3 张清晰个人照片，生成一张 3:4 竖构图的单张精修写真，主题为「春夏窗边森系法式轻私房写真」。
+
+【人物一致性】
+请严格保留用户本人真实身份特征，包括脸型、五官比例、眼睛、鼻子、嘴唇、肤色、年龄感、发型基础和整体气质。生成结果必须清楚看起来是同一个真实女生，不能变成陌生人，不能欧美化，不能网红化，不能过度磨皮，不能出现 AI 假脸。
+
+【核心风格】
+整体风格为春夏窗边、森系、法式轻复古少女私房写真。气质清新、柔软、安静、轻盈，带一点慵懒、羞怯、松弛、若有所思和被自然光温柔包裹的少女感。画面像春日或初夏午后，在一个真实卧室里，被摄影师用相机偶然捕捉到的私房瞬间。
+
+【画质与光影重点】
+请重点复刻参考图那种非常柔和、朦胧、发光的真实相机质感，而不是普通 AI 清晰写真。
+
+画面需要具备以下特征：
+- 明亮自然的窗边光
+- 逆光或侧逆光
+- 局部高光轻微过曝
+- 高光有 bloom、halation、veiling glare 的泛光感
+- 空气里像有一层柔雾
+- 轻柔焦，不要高清硬锐
+- 局部轻微失焦，边缘可微微发虚
+- 带一点细腻胶片颗粒感
+- 像老镜头拍出的奶油感、梦境感、电影感
+- 整体有春夏胶片写真和轻电影色调，不要商业棚拍感
+
+整体色调为：
+奶白、米白、柔和肤色、浅暖灰、浅木色、低饱和植物绿、淡粉花色。色调温柔、通透、轻复古、略带电影感，不要过亮发白，不要数码锐化感，不要网红滤镜感。
+
+【妆容】
+妆容为非常轻薄的通透裸妆，接近素颜感。底妆轻透自然，保留少量真实皮肤纹理与自然阴影。眼妆为低饱和裸粉或浅棕色调，自然睫毛，唇色为裸粉、奶油粉或淡豆沙色。整体妆面柔和、干净、自然，不要浓妆，不要明显精致网红妆。
+
+【发型】
+发型请根据上传照片中的原始发长自然延展，不强行改变成长发或短发。
+
+- 如果是短发：保留短发基础，可做法式短卷、耳后收发、自然内扣、轻微凌乱碎发。
+- 如果是中长发：可做自然披发、轻微卷度、半扎发、低马尾、松散挽发。
+- 如果是长发：可做自然微卷披发、低马尾、松散低盘发、轻柔挽发。
+
+无论长短，都要保留自然碎发、蓬松感、毛流感和轻微凌乱感，不要发型过于正式，不要每根头发都精致完美。
+
+【服装】
+服装为白色、奶白色或米白色的法式轻私房服装，可为蕾丝睡裙、轻透吊带裙、露肩薄纱上衣、柔软层叠短裙、法式内搭风套装。材质以蕾丝、轻纱、薄棉、柔软褶皱为主。整体要柔美、少女、清透、春夏感强。
+
+【场景】
+场景设定在真实的春夏卧室或窗边房间。画面中可包含：
+- 大窗户、木窗框
+- 白色纱帘或薄窗帘
+- 白色或浅色床铺
+- 柔软枕头、花卉床品或浅色床单
+- 明显的窗边绿植、爬藤植物、枝叶、室内植物
+- 少量浅粉花朵、粉色百合、小朵玫瑰或春日感花材
+
+场景要真实、有生活感，不要像棚拍布景。床单、枕头、纱帘可以有自然褶皱，植物可以有自然遮挡和不规则生长感。
+
+【情绪与神态】
+人物情绪要自然、内敛、柔软、真实，不要营业式摆拍。可表现为：
+- 低头发呆
+- 看向窗外
+- 闭眼感受阳光
+- 半梦半醒
+- 轻微回眸
+- 趴在枕头上安静走神
+- 若有所思
+- 柔软、安静、轻微羞怯、带一点困倦和沉浸感
+
+不要夸张表情，不要每次都直视镜头，不要甜美营业笑。
+
+【镜头池】
+请从以下镜头池中随机选择 1 个镜头生成单张照片。每次生成时，镜头、姿态、视线方向和构图可以变化，但整体风格、光影、画质和氛围必须保持统一。
+
+1. 回头侧身半身像：人物坐在床边或窗边，轻轻回头或侧目，露出肩颈与背部线条，表情柔和安静。
+2. 趴卧床面中近景：人物趴在枕头或床面上，双臂自然交叠，头发松散，眼神看向一侧，像在发呆。
+3. 曲腿坐姿中景或全身像：人物坐在床上，一腿自然弯曲，姿势舒展松弛，窗光落在身体和床单上。
+4. 倚床晒光镜头：人物倚靠床边或窗边，微微仰头或闭眼，像在感受春日阳光。
+5. 伏在枕头上的近景：脸靠在枕头上，神情柔软、轻困、沉静，画面有浅景深和柔焦。
+6. 背部回眸镜头：人物背部朝向镜头，轻轻回头或垂眼，窗边高光勾出肩背轮廓。
+7. 窗边绿植包围镜头：人物靠近窗前或床边，被绿植和枝叶部分遮挡，画面有明显的春夏生长感。
+8. 花朵点缀镜头：花朵放在肩背、手边、床上或枕边，动作自然，增强少女感和春日气息。
+
+【最终目标】
+这张图必须优先体现：
+- 参考图那种朦胧发光的窗边自然光
+- 轻柔焦、胶片感、轻电影色调
+- 真实相机拍摄而不是 AI 精修图
+- 春夏卧室、绿植、床铺、白色轻私房服装的统一氛围
+- 少女柔软、松弛、安静、真实的情绪感
+
+【避免】
+不要高清硬锐
+不要商业棚拍打光
+不要塑料磨皮
+不要过于干净完美
+不要婚纱影楼风
+不要网红滤镜感
+不要表情太营业`,
+          note: '需要上传 1-3 张清晰个人照片，适合生成柔和窗边自然光、春夏卧室氛围的单张写真。',
+          images: ['data/style-examples/style-15-window-forest-french-portrait.png']
         },
       ];
 
@@ -2879,6 +3207,10 @@
         return preset.template.replace('{主体}', subject);
       }
 
+      function hasSavedKey() {
+        return Boolean((localStorage.getItem(STORE_KEY) || '').trim());
+      }
+
       function renderStyleLibrary() {
         if (!ui.styleGrid) return;
         ui.styleCount.textContent = `${STYLE_PRESETS.length} 个精选风格`;
@@ -2921,12 +3253,20 @@
             <img src="${src}" alt="${escapeHtml(preset.title)}示例 ${index + 1}" loading="lazy">
           </div>
         `).join('');
+        const isUnlocked = hasSavedKey();
         ui.styleModalTags.innerHTML = preset.tags.map(tag => `<span class="style-tag">${escapeHtml(tag)}</span>`).join('');
-        ui.styleModalPrompt.textContent = buildStylePrompt(preset);
+        ui.styleModalPrompt.classList.toggle('is-locked', !isUnlocked);
+        ui.styleModalPrompt.textContent = isUnlocked
+          ? buildStylePrompt(preset)
+          : '购买并保存 API Key 后，可查看完整 Prompt 模板并一键套用此风格。';
         ui.styleModalModel.textContent = getModelLabel(preset.model);
         ui.styleModalRatio.textContent = preset.ratio;
         ui.styleModalSize.textContent = preset.size;
-        ui.styleModalNote.textContent = preset.note;
+        ui.styleModalNote.textContent = isUnlocked
+          ? preset.note
+          : '示例图可直接浏览，完整 Prompt 属于内测用户权益。';
+        ui.styleUseBtn.textContent = isUnlocked ? '使用此风格' : '复制微信购买 / 售后';
+        ui.styleCopyBtn.textContent = isUnlocked ? '复制 Prompt' : '我已有 Key，去填写';
         ui.styleModal.classList.add('show');
       }
 
@@ -2934,8 +3274,19 @@
         ui.styleModal.classList.remove('show');
       }
 
-      function applyStylePreset() {
+      async function applyStylePreset() {
         if (!currentStylePreset) return;
+        if (!hasSavedKey()) {
+          const originalText = ui.styleUseBtn.textContent;
+          const ok = await copyText('qianaiyxs', '微信号已复制', '复制失败，请手动复制 qianaiyxs');
+          if (!ok) return;
+          ui.styleUseBtn.textContent = '微信号已复制';
+          clearTimeout(ui.styleUseBtn._timer);
+          ui.styleUseBtn._timer = setTimeout(() => {
+            if (!hasSavedKey()) ui.styleUseBtn.textContent = originalText;
+          }, 1400);
+          return;
+        }
         ui.prompt.value = buildStylePrompt(currentStylePreset);
         ui.model.value = currentStylePreset.model;
         ui.ratio.value = currentStylePreset.ratio;
@@ -2950,6 +3301,13 @@
 
       function copyStylePrompt() {
         if (!currentStylePreset) return;
+        if (!hasSavedKey()) {
+          closeStyleDetail();
+          ui.key.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          ui.key.focus();
+          msg('请先填写并保存 Key');
+          return;
+        }
         copyText(buildStylePrompt(currentStylePreset), 'Prompt 已复制');
       }
 
